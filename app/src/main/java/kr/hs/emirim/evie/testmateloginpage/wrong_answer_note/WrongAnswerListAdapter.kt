@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -55,6 +57,15 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerNoteResponse, Int)
         }
 
         private fun loadNoteImage(imageUrl: String) {
+            val layoutParams = RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+            )
+
+            listImg.layoutParams = layoutParams
+            listImg.scaleType = ImageView.ScaleType.FIT_CENTER // 이미지를 뷰에 맞춰 크롭
+            listImg.adjustViewBounds = true // 이미지의 비율을 유지
+
             Glide.with(itemView.context)
                 .load(imageUrl)
                 .placeholder(R.drawable.placeholder) // 로딩 중 표시할 이미지

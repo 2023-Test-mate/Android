@@ -12,6 +12,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.recyclerview.widget.DiffUtil
@@ -32,6 +33,7 @@ class GoalsAdapter(private val onClick: (GoalResponse) -> Unit, private val onUp
         RecyclerView.ViewHolder(itemView) {
         val goalEditText: EditText = itemView.findViewById(R.id.goal_description)
         val goalCheckBox: AppCompatCheckBox = itemView.findViewById(R.id.goal_checked)
+        val goalLayout: RelativeLayout = itemView.findViewById(R.id.goal_background)
         var currentGoal: GoalResponse? = null
 
         private lateinit var goalEditBtn: Button
@@ -58,6 +60,15 @@ class GoalsAdapter(private val onClick: (GoalResponse) -> Unit, private val onUp
                     false
                 }
             }
+
+            goalCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                currentGoal?.let {
+                    it.completed = isChecked
+                    val goalPatchRequest = it.toGoalPatchRequest()
+                    onUpdate(it.goalId, goalPatchRequest)
+                    updateUI(it.completed)
+                }
+            }
         }
 
         /* UI에 정보 바인딩(넣는 메서드) */
@@ -65,6 +76,17 @@ class GoalsAdapter(private val onClick: (GoalResponse) -> Unit, private val onUp
             currentGoal = goal
             goalEditText.setText(goal.goal)
             goalCheckBox.isChecked = goal.completed
+            updateUI(goal.completed)
+        }
+
+        private fun updateUI(completed: Boolean) {
+            if (completed) {
+                goalLayout.setBackgroundResource(R.drawable.bg_green_stroke_view)
+                goalEditText.setTextColor(itemView.context.getColor(R.color.green_500))
+            } else {
+                goalLayout.setBackgroundResource(R.drawable.bg_white_view)
+                goalEditText.setTextColor(itemView.context.getColor(R.color.black))
+            }
         }
 
         private fun closeKeyboard(view: View) {
@@ -84,16 +106,6 @@ class GoalsAdapter(private val onClick: (GoalResponse) -> Unit, private val onUp
     override fun onBindViewHolder(holder: GoalViewHolder, position: Int) {
         holder.bind(getItem(position)) // getItem(position) : 현재 아이템
     }
-
-//    override fun getItemViewType(position: Int): Int {
-//        val goal = getItem(position)
-//        return if (goal.checked) {
-//            1 // goalCheckBox가 true인 경우
-//        } else {
-//            0 // 그 외의 경우
-//        }
-//    }
-
 }
 
 object GoalDiffCallback : DiffUtil.ItemCallback<GoalResponse>() {

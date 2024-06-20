@@ -14,6 +14,10 @@ class GoalsListViewModel(val goalRepository: GoalRepository) : ViewModel() {
 
     val goalsLiveData = goalRepository.getGoalList()
 
+    fun length() : Int {
+        return goalRepository.getGoalListSize()
+    }
+
     fun readGoalList(subjectId : Int, semester : Int) {
         goalRepository.getGoalListBySemester(subjectId, semester)
     }

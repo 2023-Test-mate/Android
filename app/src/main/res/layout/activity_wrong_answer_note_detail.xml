@@ -113,9 +113,6 @@
                                     android:src="@drawable/view_all" />
                             </LinearLayout>
                         </LinearLayout>
-
-
-
                         <LinearLayout
                             android:id="@+id/img_container"
                             android:layout_width="match_parent"

@@ -27,6 +27,11 @@ class GoalRepository(resources: Resources, context: Context) {
         goalListService = RetrofitClient.create(GoalAPIService::class.java, context)
     }
 
+    // 리스트 길이
+    fun getGoalListSize(): Int {
+        return goalListData.value?.size ?: 0
+    }
+
     fun getGoalList(): MutableLiveData<List<GoalResponse>> {
         return goalListData
     }

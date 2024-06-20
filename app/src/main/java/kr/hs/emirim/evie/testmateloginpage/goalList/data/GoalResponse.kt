@@ -5,7 +5,7 @@ data class GoalResponse(
     val subjectId: Int,
     val semester: Int,
     var goal: String,
-    val completed: Boolean
+    var completed: Boolean
 )
 
 fun GoalResponse.toGoalPatchRequest(): GoalPatchRequest {

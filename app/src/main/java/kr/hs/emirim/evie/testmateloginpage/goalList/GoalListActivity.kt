@@ -55,6 +55,7 @@ class GoalListActivity : AppCompatActivity() {
     val semesterStringList = arrayOf("1학기 중간고사", "1학기 기말고사", "2학기 중간고사", "2학기 기말고사")
 
     lateinit var goalsAdapter : GoalsAdapter
+    lateinit var recyclerView :RecyclerView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +84,7 @@ class GoalListActivity : AppCompatActivity() {
         bottomSheetDialog.setContentView(bottomSheetView)
 
         goalsAdapter = GoalsAdapter({ goal -> adapterOnClick(goal) }, { goalId, updatedGoal -> updateGoal(goalId, updatedGoal) })
-        val recyclerView: RecyclerView = findViewById(R.id.goalRecyclerView)
+        recyclerView = findViewById(R.id.goalRecyclerView)
         recyclerView.adapter = goalsAdapter
 
         goalDeleteBtn = bottomSheetView.findViewById<Button>(R.id.bsv_delete_btn)
@@ -176,6 +177,9 @@ class GoalListActivity : AppCompatActivity() {
             semester = currentSemester,
             completed = false
         )
+
+        goalsAdapter.notifyItemInserted(goalsListViewModel.length() - 1)
+        recyclerView.scrollToPosition(goalsListViewModel.length() - 1)
 
         // ViewModel에 새로운 목표 추가 요청
         goalsListViewModel.createGoal(newGoal)
