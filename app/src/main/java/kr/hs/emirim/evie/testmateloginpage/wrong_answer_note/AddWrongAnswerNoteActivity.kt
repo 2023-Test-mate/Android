@@ -20,7 +20,10 @@ import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.view.Gravity
 import android.widget.*
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
 import java.io.IOException
@@ -111,7 +114,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
         uploadLayout = findViewById(R.id.upload_layout)
         imageLayout = findViewById(R.id.image_layout)
-        imageView = findViewById(R.id.imageView)
+//        imageView = findViewById(R.id.imageView)
         uploadBtnFirstLayout = findViewById(R.id.upload_btn_first_layout)
 
         uploadBtnFirstLayout.setOnClickListener {
@@ -202,23 +205,67 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         }
     }
 
+
     private fun showImage(bitmap: Bitmap) {
+        // PhotoView와 닫기 버튼을 포함할 FrameLayout 생성
+        val frameLayout = FrameLayout(this)
+
+        // 이미지를 정사각형으로 자르기
+        val squareBitmap = cropToSquare(bitmap)
+
         val photoView = PhotoView(this)
-        val layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
+        photoView.setImageBitmap(squareBitmap)
+
+        // custom drawable을 사용하여 PhotoView의 모서리를 둥글게 설정
+        val roundedDrawable = RoundedBitmapDrawableFactory.create(resources, squareBitmap)
+        roundedDrawable.cornerRadius = resources.getDimension(R.dimen.image_corner_radius)
+        photoView.setImageDrawable(roundedDrawable)
+
+        // PhotoView의 레이아웃 파라미터 설정
+        val imageLayoutParams = FrameLayout.LayoutParams(
+            resources.getDimensionPixelSize(R.dimen.image_width), // dimens에서 너비 설정
+            resources.getDimensionPixelSize(R.dimen.image_height) // dimens에서 높이 설정
+        )
+        photoView.layoutParams = imageLayoutParams
+
+        // 닫기 버튼 생성
+        val closeButton = ImageButton(this)
+        closeButton.setImageResource(R.drawable.round_x_icon_black) // 닫기 아이콘 설정
+        val closeButtonParams = FrameLayout.LayoutParams(
+            resources.getDimensionPixelSize(R.dimen.close_button_size), // dimens에서 너비 설정
+            resources.getDimensionPixelSize(R.dimen.close_button_size)  // dimens에서 높이 설정
+        )
+        closeButtonParams.gravity = Gravity.END // 오른쪽 상단 정렬
+        closeButtonParams.marginEnd = resources.getDimensionPixelSize(R.dimen.close_button_padding)
+        closeButtonParams.topMargin = resources.getDimensionPixelSize(R.dimen.close_button_padding)
+        closeButton.layoutParams = closeButtonParams
+        closeButton.setOnClickListener {
+            imageLayout.removeView(frameLayout) // ImageView와 닫기 버튼을 포함하는 FrameLayout 제거
+        }
+
+        // frameLayout에 photoView와 closeButton 추가
+        frameLayout.addView(photoView)
+        frameLayout.addView(closeButton)
+
+        // frameLayout의 레이아웃 파라미터 설정
+        val frameLayoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
-        layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.M10)
-        photoView.layoutParams = layoutParams
+        frameLayoutParams.marginEnd = resources.getDimensionPixelSize(R.dimen.image_margin)
+        frameLayoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.image_margin)
+        frameLayout.layoutParams = frameLayoutParams
 
-        Glide.with(this)
-            .load(bitmap)
-            .placeholder(R.drawable.placeholder) // 로딩 중 표시할 이미지
-            .error(R.drawable.img_error) // 에러 시 표시할 이미지
-            .into(photoView)
+        imageLayout.addView(frameLayout) // frameLayout을 imageLayout에 추가
 
-        imageLayout.addView(photoView) // 이미지를 보여줄 LinearLayout에 추가
-        imageLayout.visibility = View.VISIBLE // 이미지 레이아웃을 보이도록 설정
-        uploadLayout.visibility = View.GONE // 업로드 레이아웃은 숨김
+        // 업로드된 이미지가 포함된 부모 레이아웃을 표시
+        uploadLayout.visibility = View.GONE
+        findViewById<LinearLayout>(R.id.image_layout_parent).visibility = View.VISIBLE
     }
+
+    private fun cropToSquare(bitmap: Bitmap): Bitmap {
+        val dimension = Math.min(bitmap.width, bitmap.height)
+        return Bitmap.createBitmap(bitmap, 0, 0, dimension, dimension)
+    }
+
 }
