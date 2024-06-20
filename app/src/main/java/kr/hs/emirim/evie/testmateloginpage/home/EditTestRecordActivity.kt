@@ -63,7 +63,8 @@ class EditTestRecordActivity : AppCompatActivity() {
 
         // 이전 페이지 버튼 클릭 리스너
         beforeBtn.setOnClickListener{
-            onBackPressed();
+            finish()
+            overridePendingTransition(0, 0)
         }
 
         // 시험 날짜 버튼 클릭 리스너
