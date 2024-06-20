@@ -20,7 +20,7 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -131,31 +131,30 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="이미지를 업로드해주세요"
+                            android:text="사진이나 이미지를 올려주세요"
                             android:textStyle="bold"
                             android:textColor="@color/black.800"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="갤러리의 이미지를 업로드할 수 있습니다."
+                            android:text="이미지를 여러장 등록할 수 있습니다."
                             android:textColor="@color/black.300"
                             android:textSize="10sp"
                             android:layout_marginTop="5dp"/>
-
                         <android.widget.Button
                             android:id="@+id/upload_btn_first_layout"
-                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_gravity="center"
                             android:layout_width="80dp"
                             android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="20dp"
-                            android:background="@drawable/bg_green_view"
                             android:text="업로드"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/R14" />
+                            android:background="@drawable/bg_green_view"
+                            android:textSize="@dimen/R14"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_marginTop="20dp"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/image_layout"
+                        android:id="@+id/image_layout_parent"
                         android:layout_marginTop="15dp"
                         android:gravity="center_horizontal"
                         android:textColorHint="@color/black.200_1"
@@ -164,13 +163,26 @@
                         android:orientation="vertical"
                         android:visibility="gone">
 
-                        <ImageView
-                            android:id="@+id/imageView"
-                            android:src="@drawable/after"
+                        <HorizontalScrollView
+                            android:id="@+id/horizontal_scroll_view"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:scaleType="fitCenter"
-                            android:adjustViewBounds="true"/>
+                            android:scrollbars="none">
+
+                            <LinearLayout
+                                android:id="@+id/image_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/imageView"-->
+<!--                                    android:src="@drawable/after"-->
+<!--                                    android:layout_gravity="left"-->
+<!--                                    android:layout_width="104dp"-->
+<!--                                    android:layout_height="104dp"/>-->
+                            </LinearLayout>
+
+                        </HorizontalScrollView>
 
                         <Button
                             android:id="@+id/upload_img_btn_second_layout"
@@ -183,7 +195,9 @@
                             android:textSize="@dimen/R14"
                             style="?android:attr/borderlessButtonStyle"
                             android:layout_marginTop="20dp"/>
+
                     </LinearLayout>
+
                     <TextView
                         android:layout_marginTop="40dp"
                         android:textSize="@dimen/M14"

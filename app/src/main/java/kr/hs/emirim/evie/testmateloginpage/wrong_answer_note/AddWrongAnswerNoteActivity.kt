@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -20,16 +19,24 @@ import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.view.Gravity
+import android.widget.*
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import com.bumptech.glide.Glide
+import com.github.chrisbanes.photoview.PhotoView
+import java.io.IOException
 
 class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
     lateinit var btnGradeDialog: Button
-    lateinit var addBtn : android.widget.Button
+    lateinit var addBtn: Button
 
-    lateinit var navHome : ImageButton
-    lateinit var navWrong : ImageButton
-    lateinit var navGoal : ImageButton
-    lateinit var navCal : ImageButton
+    lateinit var navHome: ImageButton
+    lateinit var navWrong: ImageButton
+    lateinit var navGoal: ImageButton
+    lateinit var navCal: ImageButton
 
     lateinit var pre: SharedPreferences
 
@@ -42,12 +49,9 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
     private lateinit var imageLayout: LinearLayout
     private lateinit var imageView: ImageView
     private lateinit var uploadBtnFirstLayout: Button
-    private lateinit var uploadImgBtnSecondLayout: Button
 
-    private val PICK_IMAGE_REQUEST = 1
-    private var imageUri: Uri? = null
+    private val PICK_IMAGES_REQUEST = 2 // 이미지 선택 요청 코드
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wrong_answer_note_add)
@@ -56,7 +60,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         selectedScope = "추가자료"
 
         var beforeBtn = findViewById<ImageView>(R.id.before)
-        beforeBtn.setOnClickListener{
+        beforeBtn.setOnClickListener {
             finish()
             overridePendingTransition(0, 0)
         }
@@ -97,7 +101,6 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
         initializeButtonListeners(reasonButtons) { selectedButton ->
             selectedReason = selectedButton.text.toString()
-            Log.d("wrongAnswer", selectedReason)
         }
 
         initializeButtonListeners(scopeButtons) { selectedButton ->
@@ -106,25 +109,19 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
         addBtn = findViewById(R.id.addBtn)
         addBtn.setOnClickListener {
-//            WrongList.visibility = View.VISIBLE
             onBackPressed()
         }
 
         uploadLayout = findViewById(R.id.upload_layout)
         imageLayout = findViewById(R.id.image_layout)
-        imageView = findViewById(R.id.imageView)
+//        imageView = findViewById(R.id.imageView)
         uploadBtnFirstLayout = findViewById(R.id.upload_btn_first_layout)
-        uploadImgBtnSecondLayout = findViewById(R.id.upload_img_btn_second_layout)
 
         uploadBtnFirstLayout.setOnClickListener {
-            openFileChooser()
+            openImageChooser()
         }
 
-        uploadImgBtnSecondLayout.setOnClickListener {
-            openFileChooser()
-        }
-
-// navgation
+        // navgation
         navHome = findViewById(R.id.nav_home)
         navWrong = findViewById(R.id.nav_wrong)
         navGoal = findViewById(R.id.nav_goal)
@@ -132,37 +129,23 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
         navHome.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
         navWrong.setOnClickListener {
             val intent = Intent(this, WrongAnswerListActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
         navGoal.setOnClickListener {
             val intent = Intent(this, GoalMainListActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
         navCal.setOnClickListener {
             val intent = Intent(this, Calendar::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
-        }
-    }
-
-    private fun handleReasonButtonClick(selectedButton: Button, buttons: List<Button>) {
-        for (button in buttons) {
-            if (button == selectedButton) {
-                button.setBackgroundResource(R.drawable.bg_green_view)
-                button.setTextColor(ContextCompat.getColor(this, R.color.white))
-                selectedReason = button.text.toString()
-                Log.d("wrongAnswer", selectedReason!!)
-            } else {
-                button.setBackgroundResource(R.drawable.bg_white_view)
-                button.setTextColor(ContextCompat.getColor(this, R.color.black_300))
-            }
         }
     }
 
@@ -186,30 +169,103 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
             }
         }
     }
-    private fun openFileChooser() {
+
+    private fun openImageChooser() {
         val intent = Intent()
         intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true) // 여러 이미지 선택 가능하도록 설정
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "이미지 선택"), PICK_IMAGE_REQUEST)
+        startActivityForResult(Intent.createChooser(intent, "이미지 선택"), PICK_IMAGES_REQUEST)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-            imageUri = data.data
-
-            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
-                imageView.setImageBitmap(bitmap)
-
-                // 이미지를 보여주는 LinearLayout 표시 및 업로드 LinearLayout 숨김
-                imageLayout.visibility = View.VISIBLE
-                uploadLayout.visibility = View.GONE
-
-            } catch (e: Exception) {
-                e.printStackTrace()
+        if (requestCode == PICK_IMAGES_REQUEST && resultCode == Activity.RESULT_OK) {
+            if (data?.clipData != null) {
+                val clipData = data.clipData!!
+                for (i in 0 until clipData.itemCount) {
+                    val imageUri = clipData.getItemAt(i).uri
+                    try {
+                        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+                        showImage(bitmap)
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+            } else if (data?.data != null) {
+                val imageUri = data.data!!
+                try {
+                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+                    showImage(bitmap)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
         }
     }
+
+
+    private fun showImage(bitmap: Bitmap) {
+        // PhotoView와 닫기 버튼을 포함할 FrameLayout 생성
+        val frameLayout = FrameLayout(this)
+
+        // 이미지를 정사각형으로 자르기
+        val squareBitmap = cropToSquare(bitmap)
+
+        val photoView = PhotoView(this)
+        photoView.setImageBitmap(squareBitmap)
+
+        // custom drawable을 사용하여 PhotoView의 모서리를 둥글게 설정
+        val roundedDrawable = RoundedBitmapDrawableFactory.create(resources, squareBitmap)
+        roundedDrawable.cornerRadius = resources.getDimension(R.dimen.image_corner_radius)
+        photoView.setImageDrawable(roundedDrawable)
+
+        // PhotoView의 레이아웃 파라미터 설정
+        val imageLayoutParams = FrameLayout.LayoutParams(
+            resources.getDimensionPixelSize(R.dimen.image_width), // dimens에서 너비 설정
+            resources.getDimensionPixelSize(R.dimen.image_height) // dimens에서 높이 설정
+        )
+        photoView.layoutParams = imageLayoutParams
+
+        // 닫기 버튼 생성
+        val closeButton = ImageButton(this)
+        closeButton.setImageResource(R.drawable.round_x_icon_black) // 닫기 아이콘 설정
+        val closeButtonParams = FrameLayout.LayoutParams(
+            resources.getDimensionPixelSize(R.dimen.close_button_size), // dimens에서 너비 설정
+            resources.getDimensionPixelSize(R.dimen.close_button_size)  // dimens에서 높이 설정
+        )
+        closeButtonParams.gravity = Gravity.END // 오른쪽 상단 정렬
+        closeButtonParams.marginEnd = resources.getDimensionPixelSize(R.dimen.close_button_padding)
+        closeButtonParams.topMargin = resources.getDimensionPixelSize(R.dimen.close_button_padding)
+        closeButton.layoutParams = closeButtonParams
+        closeButton.setOnClickListener {
+            imageLayout.removeView(frameLayout) // ImageView와 닫기 버튼을 포함하는 FrameLayout 제거
+        }
+
+        // frameLayout에 photoView와 closeButton 추가
+        frameLayout.addView(photoView)
+        frameLayout.addView(closeButton)
+
+        // frameLayout의 레이아웃 파라미터 설정
+        val frameLayoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        frameLayoutParams.marginEnd = resources.getDimensionPixelSize(R.dimen.image_margin)
+        frameLayoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.image_margin)
+        frameLayout.layoutParams = frameLayoutParams
+
+        imageLayout.addView(frameLayout) // frameLayout을 imageLayout에 추가
+
+        // 업로드된 이미지가 포함된 부모 레이아웃을 표시
+        uploadLayout.visibility = View.GONE
+        findViewById<LinearLayout>(R.id.image_layout_parent).visibility = View.VISIBLE
+    }
+
+    private fun cropToSquare(bitmap: Bitmap): Bitmap {
+        val dimension = Math.min(bitmap.width, bitmap.height)
+        return Bitmap.createBitmap(bitmap, 0, 0, dimension, dimension)
+    }
+
 }
