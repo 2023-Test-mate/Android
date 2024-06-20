@@ -30,4 +30,8 @@ interface HomeAPIService {
         @Path("subjectId") subjectId: Int,
         @Body updateRequest: SubjectUpdateRequest
     ): Call<MessageResponse>
+
+    // 홈 -> 공부 외 실패요소
+    @PATCH("api/subject/fail/{subjectId}")
+    fun updateFailure(@Path("subjectId") subjectId: Int, @Body body: Map<String, Int>): Call<Void>
 }
