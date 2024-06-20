@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,7 +29,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
 
     lateinit var spinner: Spinner
 
-    var currentSubject = 1
+    var currentSubject = 2
 
     private val subjectViewModel by viewModels<SubjectViewModel> {
         SubjectViewModelFactory(this)
@@ -44,23 +45,29 @@ class WrongAnswerListActivity : AppCompatActivity() {
     private lateinit var subjectAdapter: WrongAnswerSubjectAdapter
     private lateinit var listAdapter: WrongAnswerListAdapter
 
+    // header
+    private lateinit var userName : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wrong_answer_note)
+
+        userName = findViewById(R.id.user_name)
+        userName.text = "${CurrentUser.userDetails?.name ?: "___"} 님"
 
         // 학년 spiner api 연동
         spinner = gradeSpinner(this, R.id.spinnerWrong)
         spinner.setSelection(CurrentUser.selectGrade!! - 1)
         selectedPosition = spinner.selectedItemPosition// grade 인덱스 (ex. 3)
-        var selectedItem = spinner.getItemAtPosition(selectedPosition!!).toString() // grade 문자열 (ex. 고등학교 2학년)
+//        var selectedItem = spinner.getItemAtPosition(selectedPosition!!).toString() // grade 문자열 (ex. 고등학교 2학년)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // 선택된 항목의 위치(position)를 이용하여 해당 항목의 값을 가져옴
                 selectedPosition = position + 1
                 CurrentUser.selectGrade = spinner.selectedItemPosition + 1
                 subjectViewModel.readSubjectList(selectedPosition!!)
-                listViewModel.clearList(selectedPosition!!)
-                listViewModel.readNoteList(CurrentUser.selectGrade!!, currentSubject)
+//                listViewModel.clearList(selectedPosition!!)
+                listViewModel.readNoteList(spinner.selectedItemPosition + 1, currentSubject)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -127,7 +134,6 @@ class WrongAnswerListActivity : AppCompatActivity() {
     private fun subjectAdapterOnClick(subject: SubjectResponse, position: Int) {
         subjectAdapter.updateSelectedPosition(position)
         listViewModel.readNoteList(CurrentUser.selectGrade!!, subject.subjectId)
-        Log.d("subjectAdapterOnClick", subject.subjectId.toString())
     }
 
     private fun noteAdapterOnClick(list : WrongAnswerNoteResponse, position: Int) {
