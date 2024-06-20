@@ -8,12 +8,14 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
+import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 
 class Calendar<CalendarBinding> : AppCompatActivity() {
@@ -23,6 +25,9 @@ class Calendar<CalendarBinding> : AppCompatActivity() {
     lateinit var navGoal : ImageButton
     lateinit var navCal : ImageButton
 
+    // header
+    private lateinit var userName : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
@@ -31,7 +36,8 @@ class Calendar<CalendarBinding> : AppCompatActivity() {
         viewPager.adapter = CalendarPagerAdapter()
         viewPager.setCurrentItem(Int.MAX_VALUE / 2, false)  // 중간 페이지로 설정
 
-
+        userName = findViewById(R.id.user_name)
+        userName.text = "${CurrentUser.userDetails?.name ?: "___"} 님"
 
         navHome = findViewById(R.id.nav_home)
         navWrong = findViewById(R.id.nav_wrong)

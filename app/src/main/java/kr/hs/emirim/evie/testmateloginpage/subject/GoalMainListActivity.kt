@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +33,9 @@ class GoalMainListActivity : AppCompatActivity() {
     private lateinit var navCal: ImageButton
     private lateinit var recyclerView: RecyclerView
 
+    // header
+    private lateinit var userName : TextView
+
     private val subjectViewModel by viewModels<SubjectViewModel> {
         SubjectViewModelFactory(this)
     }
@@ -50,6 +54,9 @@ class GoalMainListActivity : AppCompatActivity() {
         navGoal = findViewById(R.id.nav_goal)
         navCal = findViewById(R.id.nav_cal)
         recyclerView = findViewById(R.id.goalMainRecyclerView)
+
+        userName = findViewById(R.id.user_name)
+        userName.text = "${CurrentUser.userDetails?.name ?: "___"} 님"
 
         // 학년 spiner api 연동
         spinner = SpinnerUtil.gradeSpinner(this, R.id.spinnerWrong)

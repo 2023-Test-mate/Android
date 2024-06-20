@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,9 +45,15 @@ class WrongAnswerListActivity : AppCompatActivity() {
     private lateinit var subjectAdapter: WrongAnswerSubjectAdapter
     private lateinit var listAdapter: WrongAnswerListAdapter
 
+    // header
+    private lateinit var userName : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wrong_answer_note)
+
+        userName = findViewById(R.id.user_name)
+        userName.text = "${CurrentUser.userDetails?.name ?: "___"} 님"
 
         // 학년 spiner api 연동
         spinner = gradeSpinner(this, R.id.spinnerWrong)

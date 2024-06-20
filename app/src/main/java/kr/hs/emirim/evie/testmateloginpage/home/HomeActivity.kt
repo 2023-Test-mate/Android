@@ -100,7 +100,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var toggle: ImageButton
     lateinit var subjectsAdapter: SubjectHomeAdapter
 
-
+    // header
     private lateinit var drawerLayout: LinearLayout
     private lateinit var toggleButton: ImageButton
     private lateinit var userName : TextView
