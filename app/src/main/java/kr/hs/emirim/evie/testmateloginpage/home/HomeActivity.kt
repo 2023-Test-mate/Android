@@ -13,6 +13,7 @@ import android.view.Display
 import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.HorizontalScrollView
 import android.widget.ImageButton
@@ -25,6 +26,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -122,6 +124,11 @@ class HomeActivity : AppCompatActivity() {
     var subjectId = 1
     var selectedText = ""
 
+    private lateinit var failure1: Button
+    private lateinit var failure2: Button
+    private lateinit var failure3: Button
+    private lateinit var failure4: Button
+
     // onCreate 메서드는 액티비티가 처음 생성될 때 호출
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -153,19 +160,10 @@ class HomeActivity : AppCompatActivity() {
         top2reasonPercent = findViewById(R.id.reason2Percentage)
         top3reasonPercent = findViewById(R.id.reason3Percentage)
 
-
         // TODO : 실제로는 이 값을 동적으로 설정해야 함 -> 스피너에 있는 subjectId
         fetchSubjectData(subjectId) // 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
         fetchTop3RangeData(subjectId) // 문제가 잘 나오는 곳 TOP3
         fetchTop3ReasonData(subjectId) // 오답 실수 TOP3 퍼센트
-
-
-        //       toggle = findViewById(R.id.toggle)
-        //       drawerLayout = findViewById(R.id.drawer_layout)
-        //       toggle.setOnClickListener {
-        //           drawerLayout.openDrawer(GravityCompat.START)
-        //
-        //       }
 
         Log.d("homeLog", CurrentUser.selectGrade.toString())
 
@@ -270,8 +268,21 @@ class HomeActivity : AppCompatActivity() {
             drawerLayout.layoutParams = layoutParams
         }
 
+        // 실패요소 버튼
+        failure1 = findViewById(R.id.failure1)
+        failure2 = findViewById(R.id.failure2)
+        failure3 = findViewById(R.id.failure3)
+        failure4 = findViewById(R.id.failure4)
 
-        setNavListeners() // 네비게이션ㄱ 바
+        val buttons = listOf(failure1, failure2, failure3, failure4)
+        for (button in buttons) {
+            button.setOnClickListener {
+                updateButtonStyles(button)
+            }
+        }
+
+
+        setNavListeners() // 네비게이션 바
     } // onCreate
 
     private fun adapterOnClick(subject: SubjectResponse) {
@@ -563,5 +574,26 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this, cls)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
+    }
+
+    // 실패요소 버튼 클릭 이벤트
+    private fun updateButtonStyles(clickedButton: Button) {
+        val buttons = listOf(failure1, failure2, failure3, failure4)
+
+        for (button in buttons) {
+            if (button == clickedButton) {
+                button.setBackgroundResource(R.drawable.popup_btn_round)
+                button.setTextColor(ContextCompat.getColor(this, R.color.green_500))
+            } else {
+                button.setBackgroundResource(R.drawable.popup_btn_round_gray)
+                button.setTextColor(ContextCompat.getColor(this, R.color.black_800))
+            }
+            button.setPadding(16.dpToPx(this), button.paddingTop, button.paddingRight, button.paddingBottom)
+        }
+    }
+
+    // dp를 px로 변환하는 확장 함수
+    private fun Int.dpToPx(context: Context): Int {
+        return (this * context.resources.displayMetrics.density).toInt()
     }
 }
