@@ -21,8 +21,8 @@
     <dimen name="drawer_height_visible">700dp</dimen>
     <dimen name="image_size_104dp">104dp</dimen>
     <!-- 이미지 너비와 높이 -->
-    <dimen name="image_width">180dp</dimen>
-    <dimen name="image_height">180dp</dimen>
+    <dimen name="image_width">140dp</dimen>
+    <dimen name="image_height">140dp</dimen>
     <dimen name="image_margin">8dp</dimen>
     <!-- 이미지를 위한 둥근 모서리 -->
     <dimen name="image_corner_radius">40dp</dimen>
