@@ -103,14 +103,19 @@ class ReadWrongAnswerNoteActivity : AppCompatActivity() {
                             for ((index, url) in limitedImageList.withIndex()) {
                                 val imageView = ImageView(this@ReadWrongAnswerNoteActivity)
 
+                                // 이미지 뷰의 레이아웃 파라미터 설정
                                 val layoutParams = LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT,
-                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                                    resources.getDimensionPixelSize(R.dimen.image_size_104dp),
+                                    resources.getDimensionPixelSize(R.dimen.image_size_104dp)
                                 )
 
+                                // 마지막 이미지를 제외하고 마진을 추가
+                                if (index < limitedImageList.size - 1) {
+                                    layoutParams.rightMargin = imageMargin
+                                }
+
                                 imageView.layoutParams = layoutParams
-                                imageView.scaleType = ImageView.ScaleType.FIT_CENTER // 이미지를 뷰에 맞춰 크롭
-                                imageView.adjustViewBounds = true // 이미지의 비율을 유지
+                                imageView.scaleType = ImageView.ScaleType.CENTER_CROP // 이미지를 뷰에 맞춰 크롭
 
                                 Glide.with(this@ReadWrongAnswerNoteActivity)
                                     .load(url)
