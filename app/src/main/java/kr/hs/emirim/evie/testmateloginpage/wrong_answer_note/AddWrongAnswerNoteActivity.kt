@@ -59,6 +59,9 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var uploadBtnFirstLayout: Button
 
+    // 추가된 변수 선언
+    private var currentSubjectId: Int = 1
+    private var selectedGrade: Int = 1
 
     // 이미지 관련 변수
     private val PICK_IMAGES_REQUEST = 2 // 이미지 선택 요청 코드
@@ -126,6 +129,10 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
         addBtn = findViewById(R.id.addBtn)
 
+        // Intent로부터 값 가져오기
+        currentSubjectId = intent.getIntExtra("currentSubjectId", 1)
+        selectedGrade = intent.getIntExtra("selectedGrade", 1)
+
         // 오답노트에 넣을 값들(문제 제목, 학년정보, 시험스타일, 문제&풀이 이미지, 오답이유, 문제 범위)
         selectedReason = "실수"
         selectedScope = "추가자료"
@@ -141,7 +148,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
         addBtn.setOnClickListener {
             // TODO : 선택한 과목의 subjectId와 grade 가져오기
-            val subjectId = "1".toRequestBody("text/plain".toMediaTypeOrNull())
+            val subjectId = currentSubjectId.toString().toRequestBody("text/plain".toMediaTypeOrNull())
             val grade = selectedGradeIndex.toString().toRequestBody("text/plain".toMediaTypeOrNull())
             val title = noteTitle.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
             val styles = testStyle.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())

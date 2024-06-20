@@ -70,11 +70,8 @@ class WrongAnswerListActivity : AppCompatActivity() {
 
         // 오답노트 추가 버튼
         addPage = findViewById(R.id.addBtn)
-        addPage.setOnClickListener {
-            val intent = Intent(this, AddWrongAnswerNoteActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
-        }
+
+
 
         // 과목 버튼 recyclerView
         subjectAdapter = WrongAnswerSubjectAdapter(object : (SubjectResponse, Int) -> Unit {
@@ -117,6 +114,15 @@ class WrongAnswerListActivity : AppCompatActivity() {
             it?.let { // goalsLiveData의 값이 null이 아닐 때 중괄호 코드 실행
                 listAdapter.submitList(it as MutableList<WrongAnswerNoteResponse>) // 어댑터 내의 데이터를 새 리스트로 업데이트하는 데 사용
             }
+        }
+
+        addPage.setOnClickListener {
+            val intent = Intent(this, AddWrongAnswerNoteActivity::class.java).apply {
+                putExtra("currentSubjectId", currentSubject)
+                putExtra("selectedGrade", selectedPosition)
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
         }
 
         // 네비게이션
