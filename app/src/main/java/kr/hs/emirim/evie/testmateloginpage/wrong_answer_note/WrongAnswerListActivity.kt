@@ -77,11 +77,8 @@ class WrongAnswerListActivity : AppCompatActivity() {
 
         // 오답노트 추가 버튼
         addPage = findViewById(R.id.addBtn)
-        addPage.setOnClickListener {
-            val intent = Intent(this, AddWrongAnswerNoteActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
-        }
+
+
 
         // 과목 버튼 recyclerView
         subjectAdapter = WrongAnswerSubjectAdapter(object : (SubjectResponse, Int) -> Unit {
@@ -126,6 +123,14 @@ class WrongAnswerListActivity : AppCompatActivity() {
             }
         }
 
+        addPage.setOnClickListener {
+            val intent = Intent(this, AddWrongAnswerNoteActivity::class.java).apply {
+                putExtra("currentSubjectId", currentSubject)
+                putExtra("selectedGrade", selectedPosition)
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
         // 네비게이션
         navigationButtons = NavigationButtons(this)
         navigationButtons.initialize(this)
