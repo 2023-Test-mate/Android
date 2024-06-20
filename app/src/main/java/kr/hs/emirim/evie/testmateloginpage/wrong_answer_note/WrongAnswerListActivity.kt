@@ -124,7 +124,6 @@ class WrongAnswerListActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
-
         // 네비게이션
         navigationButtons = NavigationButtons(this)
         navigationButtons.initialize(this)

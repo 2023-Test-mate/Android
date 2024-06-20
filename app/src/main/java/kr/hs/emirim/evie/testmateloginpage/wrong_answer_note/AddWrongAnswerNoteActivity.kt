@@ -39,7 +39,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
     private var arrGrade = arrayOf("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
 
     // 버튼
-    private lateinit var btnGradeDialog: Button
+    private lateinit var gradeTextView: TextView
     private lateinit var addBtn: Button
 
     // 네이버바
@@ -84,25 +84,10 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
             overridePendingTransition(0, 0)
         }
 
-        // spinner
-        btnGradeDialog = findViewById(R.id.signup_grade)
+        // TextView 초기화
+        gradeTextView = findViewById(R.id.signup_grade)
         pre = getSharedPreferences("UserInfo", MODE_PRIVATE)
         val editor = pre.edit()
-
-        btnGradeDialog.setOnClickListener {
-            val dlg = AlertDialog.Builder(this@AddWrongAnswerNoteActivity, android.R.style.Theme_DeviceDefault_Light_Dialog_Alert)
-            dlg.setTitle("학년정보")
-            dlg.setItems(arrGrade) { dialog, index ->
-                btnGradeDialog.text = arrGrade[index]
-                editor.putString("usergrade", arrGrade[index])
-                selectedGradeIndex = index+1 // 선택한 학년 배열의 인덱스 저장
-                editor.apply()
-            }
-            dlg.setNegativeButton("닫기") { dialog, which ->
-                dialog.dismiss()
-            }
-            dlg.create().show()
-        }
 
         // 오답이유 버튼들
         val reasonButtons = listOf(
@@ -132,6 +117,8 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         // Intent로부터 값 가져오기
         currentSubjectId = intent.getIntExtra("currentSubjectId", 1)
         selectedGrade = intent.getIntExtra("selectedGrade", 1)
+        selectedGradeIndex = selectedGrade // 인덱스 바로 설정
+        gradeTextView.text = arrGrade[selectedGrade - 1] // 학년 정보 TextView에 표시
 
         // 오답노트에 넣을 값들(문제 제목, 학년정보, 시험스타일, 문제&풀이 이미지, 오답이유, 문제 범위)
         selectedReason = "실수"
