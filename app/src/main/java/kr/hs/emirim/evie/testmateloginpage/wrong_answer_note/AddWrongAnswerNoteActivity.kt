@@ -4,85 +4,90 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.Gravity
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
-import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
-import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
-import android.graphics.Bitmap
-import android.graphics.Color
-import android.view.Gravity
-import android.widget.*
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
-import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
+import kr.hs.emirim.evie.testmateloginpage.R
+import kr.hs.emirim.evie.testmateloginpage.api.WrongAnswerAPIService
+import kr.hs.emirim.evie.testmateloginpage.calendar.Calendar
+import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
+import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
+import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 import java.io.IOException
 
 class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
-    lateinit var btnGradeDialog: Button
-    lateinit var addBtn: Button
+    // 학년 배열
+    private var arrGrade = arrayOf("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
 
-    lateinit var navHome: ImageButton
-    lateinit var navWrong: ImageButton
-    lateinit var navGoal: ImageButton
-    lateinit var navCal: ImageButton
+    // 버튼
+    private lateinit var gradeTextView: TextView
+    private lateinit var addBtn: Button
 
-    lateinit var pre: SharedPreferences
+    // 네이버바
+    private lateinit var navHome: ImageButton
+    private lateinit var navWrong: ImageButton
+    private lateinit var navGoal: ImageButton
+    private lateinit var navCal: ImageButton
 
-    var arrGrade = arrayOf("중학교 1학년", "중학교 2학년", "중학교 3학년", "고등학교 1학년", "고등학교 2학년", "고등학교 3학년")
-
-    private lateinit var selectedReason: String
-    private lateinit var selectedScope: String
-
-    private lateinit var uploadLayout: LinearLayout
+    // 오답노트 값들
+    private lateinit var selectedReason: String // 틀린 이유
+    private var selectedGradeIndex: Int = 1 // 선택한 학년 배열의 인덱스를 저장할 변수
+    private lateinit var selectedScope: String // 문제 범위
+    private lateinit var noteTitle: EditText // 오답노트 제목
+    private lateinit var testStyle: EditText // 시험 스타일
+    private lateinit var uploadLayout: LinearLayout // 업로드할 이미지
     private lateinit var imageLayout: LinearLayout
     private lateinit var imageView: ImageView
     private lateinit var uploadBtnFirstLayout: Button
 
+    // 추가된 변수 선언
+    private var currentSubjectId: Int = 1
+    private var selectedGrade: Int = 1
+
+    // 이미지 관련 변수
     private val PICK_IMAGES_REQUEST = 2 // 이미지 선택 요청 코드
+    private val selectedImages = mutableListOf<Bitmap>() // 선택한 이미지를 저장할 리스트
+
+    // Retrofit 서비스 인스턴스
+    private lateinit var wrongNoteAPIService: WrongAnswerAPIService
+    private lateinit var pre: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wrong_answer_note_add)
 
-        selectedReason = "실수"
-        selectedScope = "추가자료"
+        // RetrofitClient를 사용하여 homeAPIService 초기화
+        wrongNoteAPIService = RetrofitClient.create(WrongAnswerAPIService::class.java, this)
 
-        var beforeBtn = findViewById<ImageView>(R.id.before)
+        val beforeBtn = findViewById<ImageView>(R.id.before)
         beforeBtn.setOnClickListener {
             finish()
             overridePendingTransition(0, 0)
         }
 
-        // spinner
-        btnGradeDialog = findViewById(R.id.signup_grade)
+        // TextView 초기화
+        gradeTextView = findViewById(R.id.signup_grade)
         pre = getSharedPreferences("UserInfo", MODE_PRIVATE)
         val editor = pre.edit()
-
-        btnGradeDialog.setOnClickListener {
-            val dlg = AlertDialog.Builder(this@AddWrongAnswerNoteActivity, android.R.style.Theme_DeviceDefault_Light_Dialog_Alert)
-            dlg.setTitle("학년정보")
-            dlg.setItems(arrGrade) { dialog, index ->
-                btnGradeDialog.text = arrGrade[index]
-                editor.putString("usergrade", arrGrade[index])
-                editor.apply()
-            }
-            dlg.setNegativeButton("닫기") { dialog, which ->
-                dialog.dismiss()
-            }
-            dlg.create().show()
-        }
 
         // 오답이유 버튼들
         val reasonButtons = listOf(
@@ -108,18 +113,64 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         }
 
         addBtn = findViewById(R.id.addBtn)
-        addBtn.setOnClickListener {
-            onBackPressed()
-        }
 
+        // Intent로부터 값 가져오기
+        currentSubjectId = intent.getIntExtra("currentSubjectId", 1)
+        selectedGrade = intent.getIntExtra("selectedGrade", 1)
+        selectedGradeIndex = selectedGrade // 인덱스 바로 설정
+        gradeTextView.text = arrGrade[selectedGrade - 1] // 학년 정보 TextView에 표시
+
+        // 오답노트에 넣을 값들(문제 제목, 학년정보, 시험스타일, 문제&풀이 이미지, 오답이유, 문제 범위)
+        selectedReason = "실수"
+        selectedScope = "추가자료"
+        noteTitle = findViewById(R.id.note_title)
+        testStyle = findViewById(R.id.test_style)
         uploadLayout = findViewById(R.id.upload_layout)
         imageLayout = findViewById(R.id.image_layout)
-//        imageView = findViewById(R.id.imageView)
         uploadBtnFirstLayout = findViewById(R.id.upload_btn_first_layout)
 
         uploadBtnFirstLayout.setOnClickListener {
             openImageChooser()
         }
+
+        addBtn.setOnClickListener {
+            // TODO : 선택한 과목의 subjectId와 grade 가져오기
+            val subjectId = currentSubjectId.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val grade = selectedGradeIndex.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val title = noteTitle.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val styles = testStyle.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val reason = selectedReason.toRequestBody("text/plain".toMediaTypeOrNull())
+            val range = selectedScope.toRequestBody("text/plain".toMediaTypeOrNull())
+
+            val imageParts = prepareImageParts(selectedImages)
+
+            val call = wrongNoteAPIService.uploadWrongAnswerNote(
+                subjectId,
+                grade,
+                title,
+                imageParts,
+                styles,
+                reason,
+                range
+            )
+
+            call.enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@AddWrongAnswerNoteActivity, "Upload successful", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@AddWrongAnswerNoteActivity, "Upload failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    t.printStackTrace()
+                    Toast.makeText(this@AddWrongAnswerNoteActivity, "Upload error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+
 
         // navgation
         navHome = findViewById(R.id.nav_home)
@@ -147,6 +198,21 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
         }
+    }
+
+    private fun prepareImageParts(images: List<Bitmap>): List<MultipartBody.Part> {
+        val imageParts = mutableListOf<MultipartBody.Part>()
+        images.forEachIndexed { index, bitmap ->
+            val file = File(cacheDir, "image_$index.jpg")
+            val outputStream = file.outputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream.close()
+
+            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+            val part = MultipartBody.Part.createFormData("imgs", file.name, requestBody)
+            imageParts.add(part)
+        }
+        return imageParts
     }
 
     private fun initializeButtonListeners(buttons: List<Button>, onSelect: (Button) -> Unit) {
@@ -188,6 +254,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
                     val imageUri = clipData.getItemAt(i).uri
                     try {
                         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+                        selectedImages.add(bitmap)
                         showImage(bitmap)
                     } catch (e: IOException) {
                         e.printStackTrace()
@@ -197,6 +264,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
                 val imageUri = data.data!!
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+                    selectedImages.add(bitmap)
                     showImage(bitmap)
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -204,7 +272,6 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun showImage(bitmap: Bitmap) {
         // PhotoView와 닫기 버튼을 포함할 FrameLayout 생성
@@ -267,5 +334,4 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         val dimension = Math.min(bitmap.width, bitmap.height)
         return Bitmap.createBitmap(bitmap, 0, 0, dimension, dimension)
     }
-
 }

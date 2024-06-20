@@ -66,6 +66,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"/>
                         <EditText
+                            android:id="@+id/note_title"
                             android:layout_marginLeft="16dp"
                             android:background="@drawable/bg_white_view"
                             android:hint="문서 제목을 입력해 주세요"
@@ -90,8 +91,7 @@
                             android:text="틀린 시험"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"/>
-                        <android.widget.Button
-                            android:paddingLeft="16dp"
+                        <TextView
                             android:id="@+id/signup_grade"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -99,6 +99,7 @@
                             android:drawableRight="@drawable/arrow"
                             android:textColorHint="@color/black.200_1"
                             android:hint="학년정보를 선택해 주세요"
+                            android:paddingLeft="16dp"
                             android:paddingRight="15dp"
                             android:textSize="14dp"
                             android:layout_marginLeft="16dp"
@@ -206,6 +207,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <EditText
+                        android:id="@+id/test_style"
                         android:background="@drawable/bg_white_view"
                         android:hint="시험 스타일을 입력해 주세요"
                         android:textSize="@dimen/R14"
