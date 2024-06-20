@@ -92,6 +92,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var navGoal: ImageButton
     lateinit var navCal: ImageButton
     lateinit var navWrong: ImageButton
+
     lateinit var addSubjectBtn: ImageButton
     lateinit var editTestRecordBtn: ImageButton
     lateinit var userGrade: TextView
@@ -102,6 +103,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: LinearLayout
     private lateinit var toggleButton: ImageButton
+    private lateinit var userName : TextView
 
 
     private val newSubjectActivityRequestCode = 1
@@ -121,7 +123,7 @@ class HomeActivity : AppCompatActivity() {
     // Retrofit 서비스 인스턴스
     private lateinit var homeAPIService: HomeAPIService
 
-    var subjectId = 1
+    var subjectId = 2
     var selectedText = ""
 
     private lateinit var failure1: Button
@@ -139,6 +141,9 @@ class HomeActivity : AppCompatActivity() {
 
         // RetrofitClient를 사용하여 homeAPIService 초기화
         homeAPIService = RetrofitClient.create(HomeAPIService::class.java, this)
+
+        userName = findViewById(R.id.user_name)
+        userName.text = "${CurrentUser.userDetails?.name ?: "___"} 님"
 
         // findViewById를 사용하여 레이아웃 파일에서 뷰를 가져와 변수에 할당
         // 홈 -> 과목 정보(시험 점수 리스트, 시험날짜, 난이도, 점수, 실패요소)
