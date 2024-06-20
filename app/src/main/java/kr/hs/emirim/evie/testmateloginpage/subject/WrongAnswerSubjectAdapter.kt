@@ -15,7 +15,7 @@ import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 class WrongAnswerSubjectAdapter(private val onClick: (SubjectResponse, Int) -> Unit) :
     ListAdapter<SubjectResponse, WrongAnswerSubjectAdapter.WrongAnswerSubjectHolder>(WrongAnswerSubjectDiffCallback) {
 
-    private var selectedPosition: Int = RecyclerView.NO_POSITION
+    private var selectedPosition = 0
 
     inner class WrongAnswerSubjectHolder(itemView: View, val onClick: (SubjectResponse, Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
