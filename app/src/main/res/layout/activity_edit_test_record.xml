@@ -62,6 +62,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/exam_edit_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
@@ -85,36 +86,45 @@
                     android:layout_marginTop="12dp"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/test_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_white_view"
-                        android:hint="시험이름을 입력해주세요"
-                        android:maxLines="1"
-                        android:padding="15dp"
-                        android:singleLine="true"
-                        android:textColorHint="@color/black.200_1"
-                        android:textSize="@dimen/R14" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/test_name"-->
+<!--                        android:layout_width="286dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@drawable/bg_white_view"-->
+<!--                        android:hint="시험이름을 입력해주세요"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:padding="15dp"-->
+<!--                        android:singleLine="true"-->
+<!--                        android:textColorHint="@color/black.200_1"-->
+<!--                        android:textSize="@dimen/R14" />-->
 
 
-                    <EditText
-                        android:id="@+id/test_score"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="3"
-                        android:background="@drawable/bg_white_view"
-                        android:hint="점수"
-                        android:maxLines="1"
-                        android:padding="15dp"
-                        android:singleLine="true"
-                        android:textColorHint="@color/black.200_1"
-                        android:textSize="@dimen/R14" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/test_score"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:layout_weight="3"-->
+<!--                        android:background="@drawable/bg_white_view"-->
+<!--                        android:hint="점수"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:padding="15dp"-->
+<!--                        android:singleLine="true"-->
+<!--                        android:textColorHint="@color/black.200_1"-->
+<!--                        android:textSize="@dimen/R14" />-->
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
                 </LinearLayout>
 
                 <ImageButton
+                    android:id="@+id/add_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -229,8 +239,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-
-
-
 </LinearLayout>
