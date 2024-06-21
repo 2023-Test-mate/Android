@@ -36,13 +36,17 @@ class WrongAnswerNoteImagesActivity : AppCompatActivity() {
 
         imageList?.let {
             for (url in it) {
-                val photoView = PhotoView(this)
-                val layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-                layoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.M10)
-                photoView.layoutParams = layoutParams
+                val photoView = PhotoView(this).apply {
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    ).also {
+                        it.bottomMargin = resources.getDimensionPixelSize(R.dimen.M10)
+                    }
+                    scaleType = ImageView.ScaleType.FIT_CENTER
+                    adjustViewBounds = true
+                }
+
                 Glide.with(this)
                     .load(url)
                     .placeholder(R.drawable.placeholder) // 로딩 중 표시할 이미지

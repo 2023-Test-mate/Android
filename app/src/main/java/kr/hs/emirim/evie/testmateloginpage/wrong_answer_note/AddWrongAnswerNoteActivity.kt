@@ -2,6 +2,7 @@ package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
@@ -10,6 +11,8 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -129,6 +132,17 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
         imageLayout = findViewById(R.id.image_layout)
         uploadBtnFirstLayout = findViewById(R.id.upload_btn_first_layout)
 
+        testStyle.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                v.clearFocus()
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+                true
+            } else {
+                false
+            }
+        }
+
         uploadBtnFirstLayout.setOnClickListener {
             openImageChooser()
         }
@@ -158,6 +172,8 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
                         Toast.makeText(this@AddWrongAnswerNoteActivity, "Upload successful", Toast.LENGTH_SHORT).show()
+                        wrongNoteAPIService.getNoteListByGradeSubject(selectedGradeIndex, currentSubjectId)
+                        finish()
                     } else {
                         Toast.makeText(this@AddWrongAnswerNoteActivity, "Upload failed", Toast.LENGTH_SHORT).show()
                     }

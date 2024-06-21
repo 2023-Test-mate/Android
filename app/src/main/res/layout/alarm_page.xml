@@ -2,24 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
+    <!--TODO : 탭 코드 확인-->
 
-    <!-- 상단 타이틀 바 -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
         android:paddingTop="26.5dp"
         android:paddingBottom="26.5dp"
-        android:paddingLeft="12dp">
-
+        android:paddingLeft="12dp"
+        android:layout_margin="0dp">
         <ImageView
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/before_btn"
             android:layout_centerVertical="true"/>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,102 +32,189 @@
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 
-    <!-- ScrollView -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <!-- 새로운 알림 섹션 -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="새로운 알림"
-                android:textColor="@color/black"
-                android:textSize="14dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginBottom="8dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/newAlarmRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"/>
-
-            <!-- 최근 7일 알림 섹션 -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="최근 7일"
-                android:textColor="@color/black"
-                android:textSize="14dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="8dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recentAlarmRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"/>
-
-        </LinearLayout>
-    </ScrollView>
-
-    <!-- 하단 네비게이션 바 -->
-    <LinearLayout
-        android:elevation="10dp"
-        android:background="@color/white"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:text="새로운 알림"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="8dp"/>
 
-        <ImageButton
-            android:id="@+id/nav_home"
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/bg_white_view"
+        android:padding="16dp"
+        android:gravity="left |center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:src="@drawable/home_on" />
-
-        <ImageButton
-            android:id="@+id/nav_wrong"
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
+            android:src="@drawable/alarmtest"
+            android:layout_marginRight="11dp"/>
+        <!--글씨 레이아웃-->
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:src="@drawable/note_off" />
-
-        <ImageButton
-            android:id="@+id/nav_goal"
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:src="@drawable/goal_off" />
-
-        <ImageButton
-            android:id="@+id/nav_cal"
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:src="@drawable/cal_off" />
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:text="내일 Node.js 시험이 있어요"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2024.06.21"/>
+        </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="최근 7일"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/bg_white_view"
+        android:padding="16dp"
+        android:gravity="left |center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/alarmtest"
+            android:layout_marginRight="11dp"/>
+        <!--글씨 레이아웃-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:text="내일 수학 시험이 있어요"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2024.06.18"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/bg_white_view"
+        android:padding="16dp"
+        android:gravity="left|center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/alarmtest"
+            android:layout_marginRight="11dp"/>
+        <!--글씨 레이아웃-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:text="@string/alarm_test_message"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2024.06.17"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/bg_white_view"
+        android:padding="16dp"
+        android:gravity="left|center"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/alarmnew"
+            android:layout_marginRight="11dp"/>
+        <!--글씨 레이아웃-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:text="@string/alarm_new_message"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2024.06.15"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+        <LinearLayout
+            android:elevation="10dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/home_on" />
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/note_off" />
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/goal_off" />
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/cal_off" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

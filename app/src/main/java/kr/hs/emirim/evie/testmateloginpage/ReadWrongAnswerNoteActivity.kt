@@ -42,7 +42,7 @@ class ReadWrongAnswerNoteActivity : AppCompatActivity() {
     private lateinit var scopeBtn4: Button
 
     private lateinit var deleteBtn: Button
-    private lateinit var editBtn: Button
+//    private lateinit var editBtn: Button
 
     private lateinit var imgList : List<String>
 
@@ -75,7 +75,7 @@ class ReadWrongAnswerNoteActivity : AppCompatActivity() {
         scopeBtn3 = findViewById(R.id.scope_btn3)
         scopeBtn4 = findViewById(R.id.scope_btn4)
         deleteBtn = findViewById(R.id.deleteBtn)
-        editBtn = findViewById(R.id.editBtn)
+//        editBtn = findViewById(R.id.editBtn)
 
         before.setOnClickListener {
             finish()
