@@ -29,7 +29,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
 
     lateinit var spinner: Spinner
 
-    var currentSubject = 2
+    var currentSubject = 1
 
     private val subjectViewModel by viewModels<SubjectViewModel> {
         SubjectViewModelFactory(this)
@@ -93,7 +93,13 @@ class WrongAnswerListActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) // 수평 레이아웃 방향 설정
         subjectRecyclerView.adapter = subjectAdapter
 
-        subjectViewModel.readSubjectList(CurrentUser.userDetails!!.grade.toInt()) // list 가져오기
+        CurrentUser.userDetails?.let { userDetails ->
+            subjectViewModel.readSubjectList(userDetails.grade.toInt())
+        } ?: run {
+            // Handle the case where userDetails is null
+            Log.e("TAG", "User details are null")
+            // Optional: Display an error message or take other appropriate actions
+        } // list 가져오기
         subjectViewModel.subjectListData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this
