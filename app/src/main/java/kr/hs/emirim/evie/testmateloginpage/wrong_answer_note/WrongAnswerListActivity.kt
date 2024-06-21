@@ -120,6 +120,7 @@ class WrongAnswerListActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) // 수평 레이아웃 방향 설정
         listRecyclerView.adapter = listAdapter
 
+//        listViewModel.readNoteList(CurrentUser.selectGrade!!, currentSubject)
         listViewModel.wrongAnswerListData.observe(
             // observer : 어떤 이벤트가 일어난 순간, 이벤트를 관찰하던 관찰자들이 바로 반응하는 패턴
             this
@@ -142,7 +143,13 @@ class WrongAnswerListActivity : AppCompatActivity() {
         navigationButtons.initialize(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        listViewModel.readNoteList(CurrentUser.selectGrade!!, currentSubject)
+    }
+
     private fun subjectAdapterOnClick(subject: SubjectResponse, position: Int) {
+        currentSubject = subject.subjectId
         subjectAdapter.updateSelectedPosition(position)
         listViewModel.readNoteList(CurrentUser.selectGrade!!, subject.subjectId)
     }
