@@ -169,17 +169,21 @@ class EditTestRecordActivity : AppCompatActivity() {
             testRecordDataList.clear() // 기존 데이터를 지우고 새로운 데이터로 업데이트
             testRecordDataList.addAll(it.exams) // testRecordDataList에 exams 정보 넣기
 
+            // 시험 점수 리스트를 동적으로 생성하여 containerLayout에 추가
+            containerLayout.removeAllViews()
+            for (exam in it.exams) {
+                addNewLayout(exam)
+            }
+
             // 성적 그래프
             val linechart = findViewById<LineChart>(R.id.test_record_chart)
             val horizontalScrollView = findViewById<HorizontalScrollView>(R.id.scroll_view_graph)
             val scoreChart = ScoreChart(linechart, horizontalScrollView, this) // MPAndroidChart 커스텀 클래스
             scoreChart.setupChart(testRecordDataList)
-
-            // TODO : 시험 점수 리스트 추가하기
         }
     }
 
-    fun UpdateSubjectInfo(subjectId : Int) {
+    fun UpdateSubjectInfo(subjectId: Int) {
         val newExams = mutableListOf<ExamUpdate>()
 
         for (i in 0 until containerLayout.childCount) {
@@ -203,7 +207,6 @@ class EditTestRecordActivity : AppCompatActivity() {
             ExamUpdate(exam.examName, exam.examScore)
         }
 
-
         // 디버깅을 위해 updatedExams 내용을 로그로 출력
         for (examUpdate in updatedExams) {
             println("ExamUpdate: $examUpdate")
@@ -225,6 +228,7 @@ class EditTestRecordActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
                     if (response.isSuccessful) {
                         Toast.makeText(this@EditTestRecordActivity, "Data saved successfully", Toast.LENGTH_SHORT).show()
+                        finish() // 액티비티 종료하여 이전 페이지로 돌아가기
                     } else {
                         Toast.makeText(this@EditTestRecordActivity, "Failed to save data", Toast.LENGTH_SHORT).show()
                     }
@@ -241,9 +245,6 @@ class EditTestRecordActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveExams() {
-
-    }
 
     fun processDatePickerResult(year: Int, month: Int, day: Int) {
         val monthString = (month + 1).toString()
@@ -258,7 +259,8 @@ class EditTestRecordActivity : AppCompatActivity() {
          Toast.makeText(this, "Date: $selectedDate", Toast.LENGTH_SHORT).show()
     }
 
-    private fun addNewLayout() {
+    // 새 레이아웃을 동적으로 추가하고 exam 데이터를 설정
+    private fun addNewLayout(exam: HomeSubjectInfoResponse.Exam? = null) {
         val inflater = layoutInflater
         val newLayout = inflater.inflate(R.layout.exam_edit_item, containerLayout, false)
 
@@ -270,7 +272,16 @@ class EditTestRecordActivity : AppCompatActivity() {
         layoutParams.setMargins(0, 15, 0, 0)
         newLayout.layoutParams = layoutParams
 
-        // 새 레이아웃을 버튼 아래에 추가
+        // 새로운 레이아웃을 containerLayout에 추가
         containerLayout.addView(newLayout)
+
+        // exam 데이터가 있으면 해당 값을 설정
+        if (exam != null) {
+            val examNameEditText = newLayout.findViewById<EditText>(R.id.test_name)
+            val examScoreEditText = newLayout.findViewById<EditText>(R.id.test_score)
+
+            examNameEditText.setText(exam.examName)
+            examScoreEditText.setText(exam.examScore.toString())
+        }
     }
 }
