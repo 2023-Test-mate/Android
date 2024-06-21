@@ -244,6 +244,7 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this@HomeActivity, EditTestRecordActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             //            startActivity(intent)
+            intent.putExtra("subjectId", subjectId) // subjectId를 주기
             startActivityForResult(intent, newSubjectActivityRequestCode)
         }
 

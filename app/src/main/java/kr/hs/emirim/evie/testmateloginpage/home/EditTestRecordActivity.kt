@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.HorizontalScrollView
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.SeekBar
 import android.widget.TextView
@@ -39,7 +42,8 @@ class EditTestRecordActivity : AppCompatActivity() {
     private lateinit var targetScoreSeekbar: SeekBar
     private lateinit var BtnSave: Button
     private lateinit var RatingBarTestDifficulty: RatingBar
-
+    private lateinit var containerLayout: LinearLayout
+    private var subjectId = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +53,8 @@ class EditTestRecordActivity : AppCompatActivity() {
         homeAPIService = RetrofitClient.create(HomeAPIService::class.java, this)
 
         /// findViewById를 사용하여 레이아웃 파일에서 뷰를 가져와 변수에 할당
-        testNameEditText = findViewById(R.id.test_name)
-        testScoreEditText = findViewById(R.id.test_score)
+//        testNameEditText = findViewById(R.id.test_name)
+//        testScoreEditText = findViewById(R.id.test_score)
         targetScore = findViewById<TextView>(R.id.target_score) // 목표점수
         beforeBtn = findViewById<ImageView>(R.id.backBtn) // 전으로 돌아가기 버튼
         BtnSetTestDate = findViewById<Button>(R.id.btn_test_date) // 시험 날짜 설정 버튼
@@ -58,8 +62,17 @@ class EditTestRecordActivity : AppCompatActivity() {
         BtnSave = findViewById<Button>(R.id.buttonSave)  // 저장 버튼
         RatingBarTestDifficulty = findViewById<RatingBar>(R.id.ratingTestDifficulty) // 시험 난이도 RatingBar
 
+        subjectId = intent.getIntExtra("subjectId", -1) // 기본값을 1에서 -1로 변경하여 디버깅
+        Log.e("subjectId", subjectId.toString())
+
         // 과목 정보 불러오기
-        fetchSubjectData(1)
+        fetchSubjectData(subjectId)
+        val addButton: ImageButton = findViewById(R.id.add_button)
+        containerLayout = findViewById(R.id.container_layout)
+
+        addButton.setOnClickListener {
+            addNewLayout()
+        }
 
         // 이전 페이지 버튼 클릭 리스너
         beforeBtn.setOnClickListener{
@@ -72,9 +85,6 @@ class EditTestRecordActivity : AppCompatActivity() {
             val newFragment: DialogFragment = DatePickerFragment()
             newFragment.show(supportFragmentManager, "datePicker")
         }
-
-
-
 
         targetScoreSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -98,7 +108,7 @@ class EditTestRecordActivity : AppCompatActivity() {
         }
 
         BtnSave.setOnClickListener {
-            UpdateSubjectInfo(1)
+            UpdateSubjectInfo(subjectId)
         }
     }
 
@@ -159,24 +169,49 @@ class EditTestRecordActivity : AppCompatActivity() {
             testRecordDataList.clear() // 기존 데이터를 지우고 새로운 데이터로 업데이트
             testRecordDataList.addAll(it.exams) // testRecordDataList에 exams 정보 넣기
 
+            // 시험 점수 리스트를 동적으로 생성하여 containerLayout에 추가
+            containerLayout.removeAllViews()
+            for (exam in it.exams) {
+                addNewLayout(exam)
+            }
+
             // 성적 그래프
             val linechart = findViewById<LineChart>(R.id.test_record_chart)
             val horizontalScrollView = findViewById<HorizontalScrollView>(R.id.scroll_view_graph)
             val scoreChart = ScoreChart(linechart, horizontalScrollView, this) // MPAndroidChart 커스텀 클래스
             scoreChart.setupChart(testRecordDataList)
-
-            // TODO : 시험 점수 리스트 추가하기
-
         }
     }
 
-    fun UpdateSubjectInfo(subjectId : Int) {
-//        val updatedExams = testRecordDataList.map { exam ->
-//            ExamUpdate(exam.examName, exam.examScore)
-//        }
+    fun UpdateSubjectInfo(subjectId: Int) {
+        val newExams = mutableListOf<ExamUpdate>()
 
-        val updatedExams: List<ExamUpdate> = listOf()  // 빈 리스트 생성
-//        val updatedExams = mutableListOf<ExamUpdate>()
+        for (i in 0 until containerLayout.childCount) {
+            val childView = containerLayout.getChildAt(i)
+            val examNameEditText = childView.findViewById<EditText>(R.id.test_name)
+            val examScoreEditText = childView.findViewById<EditText>(R.id.test_score)
+
+            val examName = examNameEditText.text.toString()
+            val examScore = examScoreEditText.text.toString().toIntOrNull()
+
+            if (examName.isNotBlank() && examScore != null) {
+                val exam = ExamUpdate(
+                    examName = examName,
+                    examScore = examScore
+                )
+                newExams.add(exam)
+            }
+        }
+
+        val updatedExams = (newExams).map { exam ->
+            ExamUpdate(exam.examName, exam.examScore)
+        }
+
+        // 디버깅을 위해 updatedExams 내용을 로그로 출력
+        for (examUpdate in updatedExams) {
+            println("ExamUpdate: $examUpdate")
+        }
+
         // Prepare request body
         val requestBody = SubjectUpdateRequest(
             exams = updatedExams,
@@ -193,6 +228,7 @@ class EditTestRecordActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
                     if (response.isSuccessful) {
                         Toast.makeText(this@EditTestRecordActivity, "Data saved successfully", Toast.LENGTH_SHORT).show()
+                        finish() // 액티비티 종료하여 이전 페이지로 돌아가기
                     } else {
                         Toast.makeText(this@EditTestRecordActivity, "Failed to save data", Toast.LENGTH_SHORT).show()
                     }
@@ -209,6 +245,7 @@ class EditTestRecordActivity : AppCompatActivity() {
         }
     }
 
+
     fun processDatePickerResult(year: Int, month: Int, day: Int) {
         val monthString = (month + 1).toString()
         val dayString = day.toString()
@@ -222,4 +259,29 @@ class EditTestRecordActivity : AppCompatActivity() {
          Toast.makeText(this, "Date: $selectedDate", Toast.LENGTH_SHORT).show()
     }
 
+    // 새 레이아웃을 동적으로 추가하고 exam 데이터를 설정
+    private fun addNewLayout(exam: HomeSubjectInfoResponse.Exam? = null) {
+        val inflater = layoutInflater
+        val newLayout = inflater.inflate(R.layout.exam_edit_item, containerLayout, false)
+
+        // 레이아웃 파라미터를 설정하여 간격 추가
+        val layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        layoutParams.setMargins(0, 15, 0, 0)
+        newLayout.layoutParams = layoutParams
+
+        // 새로운 레이아웃을 containerLayout에 추가
+        containerLayout.addView(newLayout)
+
+        // exam 데이터가 있으면 해당 값을 설정
+        if (exam != null) {
+            val examNameEditText = newLayout.findViewById<EditText>(R.id.test_name)
+            val examScoreEditText = newLayout.findViewById<EditText>(R.id.test_score)
+
+            examNameEditText.setText(exam.examName)
+            examScoreEditText.setText(exam.examScore.toString())
+        }
+    }
 }
