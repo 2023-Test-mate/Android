@@ -248,30 +248,30 @@ class HomeActivity : AppCompatActivity() {
         }
 
         // 햄버거 버튼 토글
-        drawerLayout = findViewById(R.id.drawer_layout)
-        toggleButton = findViewById(R.id.toggle)
-        val drawer_cancel = findViewById<ImageButton>(R.id.drawer_cancel)
-
-        toggleButton.setOnClickListener {
-            if (drawerLayout.visibility == View.INVISIBLE) {
-                drawerLayout.visibility = View.VISIBLE
-                val layoutParams = drawerLayout.layoutParams
-                layoutParams.height = resources.getDimensionPixelSize(R.dimen.drawer_height_visible)
-                drawerLayout.layoutParams = layoutParams
-            } else {
-                // 드로어 레이아웃을 가시하지 않은 상태로 변경하고 높이를 0으로 설정
-                drawerLayout.visibility = View.INVISIBLE
-                val layoutParams = drawerLayout.layoutParams
-                layoutParams.height = 0
-                drawerLayout.layoutParams = layoutParams
-            }
-        }
-        drawer_cancel.setOnClickListener {
-            drawerLayout.visibility = View.INVISIBLE
-            val layoutParams = drawerLayout.layoutParams
-            layoutParams.height = 0
-            drawerLayout.layoutParams = layoutParams
-        }
+//        drawerLayout = findViewById(R.id.drawer_layout)
+//        toggleButton = findViewById(R.id.toggle)
+//        val drawer_cancel = findViewById<ImageButton>(R.id.drawer_cancel)
+//
+//        toggleButton.setOnClickListener {
+//            if (drawerLayout.visibility == View.INVISIBLE) {
+//                drawerLayout.visibility = View.VISIBLE
+//                val layoutParams = drawerLayout.layoutParams
+//                layoutParams.height = resources.getDimensionPixelSize(R.dimen.drawer_height_visible)
+//                drawerLayout.layoutParams = layoutParams
+//            } else {
+//                // 드로어 레이아웃을 가시하지 않은 상태로 변경하고 높이를 0으로 설정
+//                drawerLayout.visibility = View.INVISIBLE
+//                val layoutParams = drawerLayout.layoutParams
+//                layoutParams.height = 0
+//                drawerLayout.layoutParams = layoutParams
+//            }
+//        }
+//        drawer_cancel.setOnClickListener {
+//            drawerLayout.visibility = View.INVISIBLE
+//            val layoutParams = drawerLayout.layoutParams
+//            layoutParams.height = 0
+//            drawerLayout.layoutParams = layoutParams
+//        }
 
         // 실패요소 버튼
         failure1 = findViewById(R.id.failure1)

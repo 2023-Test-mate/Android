@@ -38,7 +38,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,23 +48,22 @@
             android:text="문제를 확대해보세요!"
             android:textColor="@color/black.800"
             android:textSize="14sp"
-            android:layout_marginLeft="10dp"
             android:layout_marginBottom="15dp"/>
 
-        <HorizontalScrollView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/image_container"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="10dp">
 
             </LinearLayout>
 
-        </HorizontalScrollView>
+        </ScrollView>
 
     </LinearLayout>
 

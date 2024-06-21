@@ -76,6 +76,7 @@
                             android:paddingRight="16dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:imeOptions="actionDone"
                             android:inputType="text"/>
                     </LinearLayout>
                     <LinearLayout
@@ -216,7 +217,9 @@
                         android:padding="16dp"
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="15dp"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"/>
                     <LinearLayout
                         android:layout_marginTop="40dp"
                         android:orientation="horizontal"
@@ -229,12 +232,6 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
-                        <ImageView
-                            android:layout_gravity="center"
-                            android:src="@drawable/ion_edit"
-                            android:layout_marginLeft="7dp"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_marginTop="16dp"
@@ -287,12 +284,6 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
-                        <ImageView
-                            android:layout_gravity="center"
-                            android:src="@drawable/ion_edit"
-                            android:layout_marginLeft="7dp"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_marginTop="16dp"

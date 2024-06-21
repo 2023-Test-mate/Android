@@ -178,14 +178,15 @@ class GoalListActivity : AppCompatActivity() {
             completed = false
         )
 
-        goalsAdapter.notifyItemInserted(goalsListViewModel.length() - 1)
-        recyclerView.scrollToPosition(goalsListViewModel.length() - 1)
-
         // ViewModel에 새로운 목표 추가 요청
         goalsListViewModel.createGoal(newGoal)
 
-        // RecyclerView에 새로운 목표 추가
         goalsListViewModel.readGoalList(currentSubject.subjectId, currentSemester)
+
+        goalsAdapter.notifyDataSetChanged()
+
+        goalsAdapter.notifyItemInserted(goalsListViewModel.length() - 1)
+        recyclerView.scrollToPosition(goalsListViewModel.length() - 1)
     }
 
 }
