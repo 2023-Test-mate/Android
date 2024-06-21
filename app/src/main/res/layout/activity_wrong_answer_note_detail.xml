@@ -298,20 +298,9 @@
                                 android:layout_height="42dp"
                                 android:fontFamily="@font/notosanskr_medium"
                                 android:text="삭제"
-                                android:layout_marginRight="8dp"
                                 android:textColor="@color/red_1"
                                 android:textSize="@dimen/M16"
                                 android:background="@drawable/delete_btn"/>
-                            <android.widget.Button
-                                android:id="@+id/editBtn"
-                                style="?android:attr/borderlessButtonStyle"
-                                android:layout_width="70dp"
-                                android:layout_height="42dp"
-                                android:background="@drawable/bg_green_view"
-                                android:fontFamily="@font/notosanskr_medium"
-                                android:text="수정"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/M16" />
                         </LinearLayout>
 
                     </LinearLayout>
