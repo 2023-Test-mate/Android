@@ -10,7 +10,7 @@ class RetrofitClient {
     companion object { // RetrofitClient 클래스에 대한 동반 객체 정의
 
         // 기본 URL 상수 정의
-        private const val BASE_URL = "http://43.203.247.131"
+        private const val BASE_URL = "http://10.0.2.2:8083"
 
         // create() 메서드 정의
         fun <T> create(service: Class<T>, context: Context? = null): T {
