@@ -1,23 +1,16 @@
 package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note
 
-import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
 import kr.hs.emirim.evie.testmateloginpage.R
-import kr.hs.emirim.evie.testmateloginpage.util.ImgResourceStringToInt
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNoteResponse
 
 
@@ -68,7 +61,7 @@ class WrongAnswerListAdapter(private val onClick: (WrongAnswerNoteResponse, Int)
 
             Glide.with(itemView.context)
                 .load(imageUrl)
-                .placeholder(R.drawable.placeholder) // 로딩 중 표시할 이미지
+                .placeholder(R.drawable.img_placeholder) // 로딩 중 표시할 이미지
                 .error(R.drawable.img_error) // 에러 시 표시할 이미지
                 .into(listImg)
         }

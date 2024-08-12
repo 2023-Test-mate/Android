@@ -10,7 +10,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="80dp"
     android:layout_height="80dp"
-    android:background="@drawable/subject_button"
+    android:background="@drawable/bg_subject_button"
     android:gravity="center">
     <FrameLayout
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
             android:id="@+id/subjectImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/book_red"/>
+            android:src="@drawable/img_book_red"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/three_dots"/>
+                android:src="@drawable/icon_three_dots"/>
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

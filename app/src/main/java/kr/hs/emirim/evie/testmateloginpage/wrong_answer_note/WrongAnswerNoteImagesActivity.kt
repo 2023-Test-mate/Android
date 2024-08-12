@@ -4,13 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
-import kotlinx.coroutines.launch
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.api.WrongAnswerRepository
-import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.data.WrongAnswerNoteResponse
 
 class WrongAnswerNoteImagesActivity : AppCompatActivity() {
     private lateinit var before: ImageView
@@ -49,7 +46,7 @@ class WrongAnswerNoteImagesActivity : AppCompatActivity() {
 
                 Glide.with(this)
                     .load(url)
-                    .placeholder(R.drawable.placeholder) // 로딩 중 표시할 이미지
+                    .placeholder(R.drawable.img_placeholder) // 로딩 중 표시할 이미지
                     .error(R.drawable.img_error) // 에러 시 표시할 이미지
                     .into(photoView)
 

@@ -34,7 +34,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/dialog_radius"
+                android:background="@drawable/bg_dialog_radius"
                 android:gravity="center">
 
                 <Spinner
@@ -67,7 +67,7 @@
                     android:layout_height="80dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/add_image" />
+                    app:srcCompat="@drawable/icon_add_bg_white" />
 
             </LinearLayout>
 
@@ -141,7 +141,7 @@
                         android:layout_marginLeft="8sp"
                         android:layout_toRightOf="@id/dday"
                         android:background="@null"
-                        android:src="@drawable/edit_info"
+                        android:src="@drawable/icon_edit_info"
                         android:scaleType="fitCenter"/>
                 </RelativeLayout>
 
@@ -221,7 +221,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:background="@drawable/top_view"
+                        android:background="@drawable/bg_top_view"
                         android:gravity="center"
                         android:text="@string/top1"
                         android:textColor="@color/white"
@@ -233,7 +233,7 @@
                         android:layout_height="45dp"
                         android:layout_gravity="center"
                         android:layout_weight="6"
-                        android:background="@drawable/top_view_side"
+                        android:background="@drawable/bg_top_view_side"
                         android:gravity="center|left"
                         android:paddingLeft="16dp"
                         android:text="자료"
@@ -251,7 +251,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:background="@drawable/top_view"
+                        android:background="@drawable/bg_top_view"
                         android:gravity="center"
                         android:text="@string/top2"
                         android:textColor="@color/white"
@@ -263,7 +263,7 @@
                         android:layout_height="45dp"
                         android:layout_gravity="center"
                         android:layout_weight="6"
-                        android:background="@drawable/top_view_side"
+                        android:background="@drawable/bg_top_view_side"
                         android:gravity="center|left"
                         android:paddingLeft="16dp"
                         android:text="교과서"
@@ -280,7 +280,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:background="@drawable/top_view"
+                        android:background="@drawable/bg_top_view"
                         android:gravity="center"
                         android:text="@string/top3"
                         android:textColor="@color/white"
@@ -292,7 +292,7 @@
                         android:layout_height="45dp"
                         android:layout_gravity="center"
                         android:layout_weight="6"
-                        android:background="@drawable/top_view_side"
+                        android:background="@drawable/bg_top_view_side"
                         android:gravity="center|left"
                         android:paddingLeft="16dp"
                         android:text="참고서"
@@ -420,7 +420,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/popup_btn_round"
+                    android:background="@drawable/btn_popup_round"
                     android:gravity="left|center"
                     android:paddingLeft="16dp"
                     android:text="@string/miss_1"
@@ -432,7 +432,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/popup_btn_round_gray"
+                    android:background="@drawable/btn_popup_round_gray"
                     android:gravity="left|center"
                     android:paddingLeft="16dp"
                     android:text="@string/miss_2"
@@ -444,7 +444,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/popup_btn_round_gray"
+                    android:background="@drawable/btn_popup_round_gray"
                     android:gravity="left|center"
                     android:paddingLeft="16dp"
                     android:text="@string/miss_3"
@@ -456,7 +456,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="60dp"
-                    android:background="@drawable/popup_btn_round_gray"
+                    android:background="@drawable/btn_popup_round_gray"
                     android:gravity="left|center"
                     android:paddingLeft="16dp"
                     android:text="@string/miss_4"
@@ -486,7 +486,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/home_on"
+            android:src="@drawable/icon_home_on"
             android:clickable="true"
             android:focusable="true"/>
 
@@ -496,7 +496,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/note_off"
+            android:src="@drawable/icon_note_off"
             android:clickable="true"
             android:focusable="true"/>
 
@@ -506,7 +506,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/goal_off"
+            android:src="@drawable/icon_goal_off"
             android:clickable="true"
             android:focusable="true"/>
 
@@ -516,7 +516,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/cal_off"
+            android:src="@drawable/icon_cal_off"
             android:clickable="true"
             android:focusable="true"/>
     </LinearLayout>

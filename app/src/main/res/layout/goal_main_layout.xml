@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/rectangle_round"
+        android:background="@drawable/bg_rectangle_round"
         android:padding="15dp">
 
         <LinearLayout
@@ -26,7 +26,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/book_blue" />
+                android:background="@drawable/img_book_blue" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/goal_page" />
+            android:background="@drawable/icon_goal_page_arrow" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -9,7 +9,6 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 
 class FindIdPasswordActivity : AppCompatActivity() {
     private var isVisibleBtn = false
@@ -47,10 +46,10 @@ class FindIdPasswordActivity : AppCompatActivity() {
         btnVisible1.setOnClickListener {
             isVisibleBtn = !isVisibleBtn
             if (isVisibleBtn) {
-                btnVisible1.setImageResource(R.drawable.invisible_icon)
+                btnVisible1.setImageResource(R.drawable.icon_invisible)
                 editPw.inputType = InputType.TYPE_CLASS_TEXT
             } else {
-                btnVisible1.setImageResource(R.drawable.visible_icon)
+                btnVisible1.setImageResource(R.drawable.icon_visible)
                 editPw.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
         }
@@ -58,10 +57,10 @@ class FindIdPasswordActivity : AppCompatActivity() {
         btnVisible2.setOnClickListener {
             isVisibleCheckBtn = !isVisibleCheckBtn
             if (isVisibleCheckBtn) {
-                btnVisible2.setImageResource(R.drawable.invisible_icon)
+                btnVisible2.setImageResource(R.drawable.icon_invisible)
                 editPwCheck.inputType = InputType.TYPE_CLASS_TEXT
             } else {
-                btnVisible2.setImageResource(R.drawable.visible_icon)
+                btnVisible2.setImageResource(R.drawable.icon_visible)
                 editPwCheck.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
         }

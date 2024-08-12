@@ -19,7 +19,7 @@
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/before_btn"
+            android:src="@drawable/btn_before"
             android:layout_centerVertical="true"/>
         <TextView
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:drawableLeft="@drawable/id_icon"
+                android:drawableLeft="@drawable/icon_id"
                 android:drawablePadding="8dp"
                 android:hint="아이디를 입력해주세요"
                 android:paddingLeft="15dp"
@@ -76,7 +76,7 @@
                     android:layout_width="240dp"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:drawableLeft="@drawable/pass_icon"
+                    android:drawableLeft="@drawable/icon_pass"
                     android:drawablePadding="8dp"
                     android:hint="비밀번호를 입력해주세요"
                     android:inputType="textPassword"
@@ -98,7 +98,7 @@
                     android:layout_toRightOf="@id/edit_pw"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/invisible_icon"/>
+                    android:src="@drawable/icon_invisible"/>
             </LinearLayout>
         </LinearLayout>
 

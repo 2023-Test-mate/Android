@@ -1,6 +1,5 @@
 package kr.hs.emirim.evie.testmateloginpage.wrong_answer_note
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -8,13 +7,11 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
@@ -27,7 +24,6 @@ import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.subject.GoalMainListActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
@@ -171,11 +167,11 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
             call.enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
-                        Toast.makeText(this@AddWrongAnswerNoteActivity, "Upload successful", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddWrongAnswerNoteActivity, "오답노트가 업로드 되었습니다", Toast.LENGTH_SHORT).show()
                         wrongNoteAPIService.getNoteListByGradeSubject(selectedGradeIndex, currentSubjectId)
                         finish()
                     } else {
-                        Toast.makeText(this@AddWrongAnswerNoteActivity, "Upload failed", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this@AddWrongAnswerNoteActivity, "Upload failed", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -313,7 +309,7 @@ class AddWrongAnswerNoteActivity : AppCompatActivity() {
 
         // 닫기 버튼 생성
         val closeButton = ImageButton(this)
-        closeButton.setImageResource(R.drawable.round_x_icon_black) // 닫기 아이콘 설정
+        closeButton.setImageResource(R.drawable.icon_round_x_black) // 닫기 아이콘 설정
         val closeButtonParams = FrameLayout.LayoutParams(
             resources.getDimensionPixelSize(R.dimen.close_button_size), // dimens에서 너비 설정
             resources.getDimensionPixelSize(R.dimen.close_button_size)  // dimens에서 높이 설정

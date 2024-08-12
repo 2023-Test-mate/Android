@@ -5,7 +5,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="40dp"
-    android:background="@drawable/bg_goalbottomsheet">
+    android:background="@drawable/bg_goal_bottom_sheet">
 
     <TextView
         android:id="@+id/bsv_title"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="삭제하기"
-            android:drawableTop="@drawable/delete_icon"
+            android:drawableTop="@drawable/icon_delete"
             android:drawablePadding="3dp"
             android:background="@drawable/bg_white_view"
             android:paddingTop="9dp"

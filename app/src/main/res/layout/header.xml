@@ -21,7 +21,7 @@
             app:civ_border_overlay="true"
             app:civ_border_width="0.5dp"
             app:civ_border_color="@color/black"
-            android:src="@drawable/profile"
+            android:src="@drawable/ex_profile"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1" />
@@ -43,7 +43,7 @@
             android:layout_height="24dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/bell_off"/>
+            android:src="@drawable/icon_bell_off"/>
 
         <ImageButton
             android:id="@+id/toggle"
@@ -52,7 +52,7 @@
             android:layout_width="18dp"
             android:layout_height="16dp"
             android:layout_marginRight="20dp"
-            android:src="@drawable/list"/>
+            android:src="@drawable/icon_list"/>
 
     </LinearLayout>
 
@@ -75,7 +75,7 @@
             tools:ignore="MissingConstraints">
             <ImageButton
                 android:id="@+id/drawer_cancel"
-                android:src="@drawable/cancel"
+                android:src="@drawable/icon_cancel"
                 android:background="@color/white"
                 android:layout_width="24dp"
                 android:layout_height="24dp"/>
@@ -92,7 +92,7 @@
                     app:civ_border_overlay="true"
                     app:civ_border_width="0.5dp"
                     app:civ_border_color="@color/black"
-                    android:src="@drawable/profile"/>
+                    android:src="@drawable/ex_profile"/>
                 <LinearLayout
                     android:layout_gravity="center"
                     android:layout_marginLeft="16dp"
@@ -113,7 +113,7 @@
                             android:layout_height="wrap_content"/>
                         <ImageView
                             android:layout_gravity="center"
-                            android:src="@drawable/edit_info"
+                            android:src="@drawable/icon_edit_info"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
@@ -144,7 +144,7 @@
                 <ToggleButton
                     android:layout_gravity="center"
                     android:id="@+id/toggle_alarm"
-                    android:background="@drawable/toggle_selector"
+                    android:background="@drawable/icon_toggle_selector"
                     android:textOn=""
                     android:textOff=""
                     android:layout_width="40dp"
@@ -166,7 +166,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
                 <ImageView
-                    android:src="@drawable/after"
+                    android:src="@drawable/icon_after"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -187,7 +187,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
                 <ImageView
-                    android:src="@drawable/after"
+                    android:src="@drawable/icon_after"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -208,7 +208,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
                 <ImageView
-                    android:src="@drawable/after"
+                    android:src="@drawable/icon_after"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

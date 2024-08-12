@@ -31,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/home_off" />
+            android:src="@drawable/icon_home_off" />
 
         <ImageButton
             android:id="@+id/nav_wrong"
@@ -39,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/note_off" />
+            android:src="@drawable/icon_note_off" />
 
         <ImageButton
             android:id="@+id/nav_goal"
@@ -47,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/goal_off" />
+            android:src="@drawable/icon_goal_off" />
 
         <ImageButton
             android:id="@+id/nav_cal"
@@ -55,6 +55,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/cal_on" />
+            android:src="@drawable/icon_cal_on" />
     </LinearLayout>
 </LinearLayout>

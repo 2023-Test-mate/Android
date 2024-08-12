@@ -3,18 +3,12 @@ package kr.hs.emirim.evie.testmateloginpage.home
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Point
-import android.hardware.display.DisplayManager
 import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
-import android.view.Display
 import android.view.View
-import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -27,11 +21,9 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.LineChart
-import com.google.api.Distribution.BucketOptions.Linear
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.alarm.AlarmActivity
 import kr.hs.emirim.evie.testmateloginpage.api.home.HomeAPIService
@@ -51,7 +43,6 @@ import kr.hs.emirim.evie.testmateloginpage.util.SpinnerUtil
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListActivity
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModel
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerListViewModelFactory
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -588,10 +579,10 @@ class HomeActivity : AppCompatActivity() {
 
         for (button in buttons) {
             if (button == clickedButton) {
-                button.setBackgroundResource(R.drawable.popup_btn_round)
+                button.setBackgroundResource(R.drawable.btn_popup_round)
                 button.setTextColor(ContextCompat.getColor(this, R.color.green_500))
             } else {
-                button.setBackgroundResource(R.drawable.popup_btn_round_gray)
+                button.setBackgroundResource(R.drawable.btn_popup_round_gray)
                 button.setTextColor(ContextCompat.getColor(this, R.color.black_800))
             }
             button.setPadding(16.dpToPx(this), button.paddingTop, button.paddingRight, button.paddingBottom)

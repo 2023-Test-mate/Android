@@ -41,7 +41,7 @@
                             android:id="@+id/before"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/before_btn"
+                            android:src="@drawable/btn_before"
                             android:layout_centerVertical="true"/>
                     </RelativeLayout>
 
@@ -97,7 +97,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/bg_white_view"
-                            android:drawableRight="@drawable/arrow"
+                            android:drawableRight="@drawable/icon_arrow"
                             android:textColorHint="@color/black.200_1"
                             android:hint="학년정보를 선택해 주세요"
                             android:paddingLeft="16dp"
@@ -377,28 +377,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/home_off" />
+            android:src="@drawable/icon_home_off" />
         <ImageButton
             android:id="@+id/nav_wrong"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/note_on" />
+            android:src="@drawable/icon_note_on" />
         <ImageButton
             android:id="@+id/nav_goal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/goal_off" />
+            android:src="@drawable/icon_goal_off" />
         <ImageButton
             android:id="@+id/nav_cal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/cal_off"/>
+            android:src="@drawable/icon_cal_off"/>
 
     </LinearLayout>
 

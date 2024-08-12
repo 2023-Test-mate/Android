@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import kr.hs.emirim.evie.testmateloginpage.R
 import kr.hs.emirim.evie.testmateloginpage.login.CurrentUser
 import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectRequest
-import kr.hs.emirim.evie.testmateloginpage.subject.data.SubjectResponse
 
 const val SUBJECT_NAME = "새로운 과목"
 const val BOOK_TAG = "이미지 주소" // R.drawable.book_red
@@ -22,7 +21,7 @@ class AddSubjectActivity : AppCompatActivity() {
     private lateinit var addSubjectName: EditText
     lateinit var finishBtn : androidx.appcompat.widget.AppCompatImageButton
     lateinit var bookImg : ImageView
-    var bookImgPath : String? = "book_red"
+    var bookImgPath : String? = "img_book_red"
 
     private val subjectViewModel by viewModels<SubjectViewModel> {
         SubjectViewModelFactory(this)
@@ -61,28 +60,28 @@ class AddSubjectActivity : AppCompatActivity() {
 
         bookImg = findViewById(R.id.book_img)
         findViewById<ImageButton>(R.id.red).setOnClickListener {
-            bookImg.setImageResource(R.drawable.book_red)
-            bookImgPath = "book_red"
+            bookImg.setImageResource(R.drawable.img_book_red)
+            bookImgPath = "img_book_red"
         }
         findViewById<ImageButton>(R.id.green).setOnClickListener {
-            bookImg.setImageResource(R.drawable.book_green)
-            bookImgPath = "book_green"
+            bookImg.setImageResource(R.drawable.img_book_green)
+            bookImgPath = "img_book_green"
         }
         findViewById<ImageButton>(R.id.purple).setOnClickListener {
-            bookImg.setImageResource(R.drawable.book_purple)
-            bookImgPath = "book_purple"
+            bookImg.setImageResource(R.drawable.img_book_purple)
+            bookImgPath = "img_book_purple"
         }
         findViewById<ImageButton>(R.id.blue).setOnClickListener {
-            bookImg.setImageResource(R.drawable.book_blue)
-            bookImgPath = "book_blue"
+            bookImg.setImageResource(R.drawable.img_book_blue)
+            bookImgPath = "img_book_blue"
         }
         findViewById<ImageButton>(R.id.yellow).setOnClickListener {
-            bookImg.setImageResource(R.drawable.book_yellow)
-            bookImgPath = "book_yellow"
+            bookImg.setImageResource(R.drawable.img_book_yellow)
+            bookImgPath = "img_book_yellow"
         }
         findViewById<ImageButton>(R.id.black).setOnClickListener {
-            bookImg.setImageResource(R.drawable.book_black)
-            bookImgPath = "book_black"
+            bookImg.setImageResource(R.drawable.img_book_black)
+            bookImgPath = "img_book_black"
         }
     }
 }

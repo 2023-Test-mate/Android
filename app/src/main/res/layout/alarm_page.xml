@@ -18,7 +18,7 @@
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/before_btn"
+            android:src="@drawable/btn_before"
             android:layout_centerVertical="true"/>
         <TextView
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/alarmtest"
+            android:src="@drawable/icon_alarm_exam"
             android:layout_marginRight="11dp"/>
         <!--글씨 레이아웃-->
         <LinearLayout
@@ -94,7 +94,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/alarmtest"
+            android:src="@drawable/icon_alarm_exam"
             android:layout_marginRight="11dp"/>
         <!--글씨 레이아웃-->
         <LinearLayout
@@ -125,7 +125,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/alarmtest"
+            android:src="@drawable/icon_alarm_exam"
             android:layout_marginRight="11dp"/>
         <!--글씨 레이아웃-->
         <LinearLayout
@@ -156,7 +156,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/alarmnew"
+            android:src="@drawable/icon_alarm_new"
             android:layout_marginRight="11dp"/>
         <!--글씨 레이아웃-->
         <LinearLayout
@@ -193,28 +193,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
-                android:src="@drawable/home_on" />
+                android:src="@drawable/icon_home_on" />
             <ImageButton
                 android:background="@android:color/transparent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
-                android:src="@drawable/note_off" />
+                android:src="@drawable/icon_note_off" />
             <ImageButton
                 android:background="@android:color/transparent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
-                android:src="@drawable/goal_off" />
+                android:src="@drawable/icon_goal_off" />
             <ImageButton
                 android:background="@android:color/transparent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
-                android:src="@drawable/cal_off" />
+                android:src="@drawable/icon_cal_off" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

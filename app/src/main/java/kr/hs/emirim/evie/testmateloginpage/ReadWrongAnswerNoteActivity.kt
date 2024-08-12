@@ -1,8 +1,6 @@
 package kr.hs.emirim.evie.testmateloginpage
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.icu.lang.UCharacter.VerticalOrientation
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -13,10 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.github.chrisbanes.photoview.PhotoView
 import kotlinx.coroutines.launch
 import kr.hs.emirim.evie.testmateloginpage.api.WrongAnswerRepository
 import kr.hs.emirim.evie.testmateloginpage.wrong_answer_note.WrongAnswerNoteImagesActivity
@@ -119,7 +113,7 @@ class ReadWrongAnswerNoteActivity : AppCompatActivity() {
 
                                 Glide.with(this@ReadWrongAnswerNoteActivity)
                                     .load(url)
-                                    .placeholder(R.drawable.placeholder) // 로딩 중 표시할 이미지
+                                    .placeholder(R.drawable.img_placeholder) // 로딩 중 표시할 이미지
                                     .error(R.drawable.img_error) // 에러 시 표시할 이미지
                                     .into(imageView)
 

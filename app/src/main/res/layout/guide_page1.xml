@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="204dp"
         android:layout_height="205dp"
-        android:src="@drawable/book"
+        android:src="@drawable/img_book"
         android:scaleType="center"
         android:layout_gravity="center"
         android:layout_marginTop="130dp"
@@ -36,7 +36,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/dot1"
+        android:src="@drawable/icon_dot1"
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
         />

@@ -36,7 +36,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/before_btn"
+                    android:src="@drawable/btn_before"
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
 
@@ -113,19 +113,19 @@
                 <ImageButton
                     android:layout_marginRight="5dp"
                     android:background="@drawable/bg_white_view"
-                    android:src="@drawable/ion_camera"
+                    android:src="@drawable/icon_camera"
                     android:layout_width="80dp"
                     android:layout_height="80dp"/>
                 <ImageButton
                     android:layout_marginRight="5dp"
                     android:background="@drawable/bg_white_view"
-                    android:src="@drawable/ion_camera"
+                    android:src="@drawable/icon_camera"
                     android:layout_width="80dp"
                     android:layout_height="80dp"/>
                 <ImageButton
                     android:layout_marginRight="5dp"
                     android:background="@drawable/bg_white_view"
-                    android:src="@drawable/ion_camera"
+                    android:src="@drawable/icon_camera"
                     android:layout_width="80dp"
                     android:layout_height="80dp"/>
 

@@ -37,7 +37,7 @@ class AdapterDay(private val tempMonth: Int, private val dayList: MutableList<Da
             today.get(Calendar.MONTH) == date.month &&
             today.get(Calendar.DAY_OF_MONTH) == date.date) {
             binding.itemDayText.setTextColor(Color.WHITE)
-            binding.itemDayText.setBackgroundResource(R.drawable.today_background)
+            binding.itemDayText.setBackgroundResource(R.drawable.icon_today_background)
         } else {
             // 다른 날짜의 스타일 설정
             binding.itemDayText.setTextColor(

@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"/>
         <ImageButton
             android:layout_gravity="center"
-            android:src="@drawable/cancel"
+            android:src="@drawable/icon_cancel"
             android:background="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -95,7 +95,7 @@
     </ScrollView>
 
     <View
-        android:background="@drawable/shadow"
+        android:background="@drawable/bg_shadow"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="30dp"

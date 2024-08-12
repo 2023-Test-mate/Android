@@ -8,13 +8,13 @@
     app:cardCornerRadius="8dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
-    android:background="@drawable/popup_round">
+    android:background="@drawable/btn_popup_round_2">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@drawable/popup_round"
+        android:background="@drawable/btn_popup_round_2"
         android:padding="15dp">
 
         <TextView

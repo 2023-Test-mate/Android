@@ -29,7 +29,7 @@
             android:id="@+id/finish_edit_subject"
             android:layout_gravity="center"
             android:background="@color/white"
-            android:src="@drawable/cancel"
+            android:src="@drawable/icon_cancel"
             android:layout_width="24dp"
             android:layout_height="24dp"/>
     </LinearLayout>
@@ -70,7 +70,7 @@
             android:id="@+id/book_img"
             android:background="@drawable/bg_book_image"
             android:backgroundTint="@color/bookBgColor"
-            android:src="@drawable/book_red"
+            android:src="@drawable/img_book_red"
             android:layout_width="162dp"
             android:layout_height="162dp"
             android:layout_marginRight="12dp"/>
@@ -86,7 +86,7 @@
                 android:layout_marginRight="6dp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_white_view"
-                android:src="@drawable/book_red"
+                android:src="@drawable/img_book_red"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <ImageButton
@@ -95,7 +95,7 @@
                 android:layout_marginRight="6dp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_white_view"
-                android:src="@drawable/book_green"
+                android:src="@drawable/img_book_green"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <ImageButton
@@ -104,14 +104,14 @@
                 android:layout_marginRight="6dp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_white_view"
-                android:src="@drawable/book_purple"
+                android:src="@drawable/img_book_purple"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <ImageButton
                 android:id="@+id/yellow"
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_white_view"
-                android:src="@drawable/book_yellow"
+                android:src="@drawable/img_book_yellow"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <ImageButton
@@ -119,7 +119,7 @@
                 android:layout_marginTop="6dp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_white_view"
-                android:src="@drawable/book_blue"
+                android:src="@drawable/img_book_blue"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
             <ImageButton
@@ -127,7 +127,7 @@
                 android:layout_marginTop="6dp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_white_view"
-                android:src="@drawable/book_black"
+                android:src="@drawable/img_book_black"
                 android:layout_width="50dp"
                 android:layout_height="50dp"/>
         </GridLayout>

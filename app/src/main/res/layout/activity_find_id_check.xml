@@ -17,7 +17,7 @@
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/before_btn"
+            android:src="@drawable/btn_before"
             android:layout_centerVertical="true"/>
         <TextView
             android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/id_check"
+            android:src="@drawable/icon_check"
             android:outlineProvider="none"/>
         <TextView
             android:layout_width="wrap_content"

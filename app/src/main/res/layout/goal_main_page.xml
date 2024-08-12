@@ -27,7 +27,7 @@
             <!-- spinner -->
             <LinearLayout
                 android:id="@+id/spinner_layout"
-                android:background="@drawable/dialog_radius"
+                android:background="@drawable/bg_dialog_radius"
                 android:layout_width="176dp"
                 android:layout_height="36dp"
                 android:layout_below="@id/wrongAnswerSubjectRecyclerView"
@@ -75,28 +75,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/home_off" />
+            android:src="@drawable/icon_home_off" />
         <ImageButton
             android:id="@+id/nav_wrong"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/note_off" />
+            android:src="@drawable/icon_note_off" />
         <ImageButton
             android:id="@+id/nav_goal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/goal_on" />
+            android:src="@drawable/icon_goal_on" />
         <ImageButton
             android:id="@+id/nav_cal"
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/cal_off"/>
+            android:src="@drawable/icon_cal_off"/>
 
     </LinearLayout>
 </LinearLayout>

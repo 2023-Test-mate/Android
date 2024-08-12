@@ -11,7 +11,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="8dp"
         android:padding="20dp"
-        android:background="@drawable/radius"
+        android:background="@drawable/bg_white_radius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/wan_list_img"
-                android:src="@drawable/problem_ex"
+                android:src="@drawable/ex_problem4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

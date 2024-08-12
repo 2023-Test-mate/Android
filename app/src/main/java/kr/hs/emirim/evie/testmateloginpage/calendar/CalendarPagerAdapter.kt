@@ -1,4 +1,3 @@
-import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -8,9 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.hs.emirim.evie.testmateloginpage.R
@@ -118,7 +114,7 @@ class CalendarPagerAdapter : RecyclerView.Adapter<CalendarPagerAdapter.CalendarV
             val isToday = isToday(day.toIntOrNull()) // day를 Int로 변환하여 오늘 날짜와 비교
 
             if (isToday) {
-                holder.dayTextView.setBackgroundResource(R.drawable.circle_green) // 배경색 설정
+                holder.dayTextView.setBackgroundResource(R.drawable.bg_circle_green) // 배경색 설정
                 holder.dayTextView.setTextColor(Color.WHITE) // 텍스트 색상 설정
             } else {
                 holder.dayTextView.setBackgroundResource(0) // 배경색 없음

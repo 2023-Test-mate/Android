@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="171dp"
         android:layout_height="237dp"
-        android:src="@drawable/calender"
+        android:src="@drawable/img_calender"
         android:scaleType="center"
         android:layout_gravity="center"
         android:layout_marginTop="98dp"
@@ -36,7 +36,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/dot2"
+        android:src="@drawable/icon_dot2"
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
         />

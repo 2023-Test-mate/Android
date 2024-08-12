@@ -39,7 +39,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/before_btn"
+                    android:src="@drawable/btn_before"
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
             <LinearLayout
@@ -68,7 +68,7 @@
                     android:scaleType="centerCrop"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/bg_white_view"
-                    android:src="@drawable/problem_ex"
+                    android:src="@drawable/ex_problem4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -122,7 +122,7 @@
                         android:layout_height="wrap_content"/>
                     <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/ion_edit"
+                        android:src="@drawable/icon_edit"
                         android:layout_marginLeft="7dp"
                         android:layout_width="18dp"
                         android:layout_height="18dp"/>
@@ -178,7 +178,7 @@
                         android:layout_height="wrap_content"/>
                     <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/ion_edit"
+                        android:src="@drawable/icon_edit"
                         android:layout_marginLeft="7dp"
                         android:layout_width="18dp"
                         android:layout_height="18dp"/>
@@ -283,25 +283,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/home_off" />
+            android:src="@drawable/icon_home_off" />
         <ImageButton
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/note_on" />
+            android:src="@drawable/icon_note_on" />
         <ImageButton
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/goal_off" />
+            android:src="@drawable/icon_goal_off" />
         <ImageButton
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/cal_off"/>
+            android:src="@drawable/icon_cal_off"/>
 
     </LinearLayout>
 

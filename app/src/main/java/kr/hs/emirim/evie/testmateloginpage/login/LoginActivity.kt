@@ -65,10 +65,10 @@ class LoginActivity : AppCompatActivity() {
         imageButton.setOnClickListener {
             isImageVisible = !isImageVisible
             if (isImageVisible) {
-                imageButton.setImageResource(R.drawable.invisible_icon)
+                imageButton.setImageResource(R.drawable.icon_invisible)
                 editPass.inputType = InputType.TYPE_CLASS_TEXT
             } else {
-                imageButton.setImageResource(R.drawable.visible_icon)
+                imageButton.setImageResource(R.drawable.icon_visible)
                 editPass.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             }
         }

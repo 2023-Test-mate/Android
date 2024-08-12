@@ -24,7 +24,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/before_btn"
+            android:src="@drawable/btn_before"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 
@@ -51,14 +51,14 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/profile"/>
+                    android:src="@drawable/ex_profile"/>
                 <ImageView
                     android:layout_gravity="center"
                     android:layout_marginTop="35dp"
                     android:layout_marginLeft="35dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ion_edit" />
+                    android:src="@drawable/icon_edit" />
             </FrameLayout>
 
             <LinearLayout

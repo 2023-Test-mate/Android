@@ -1,7 +1,5 @@
 package kr.hs.emirim.evie.testmateloginpage
 
-import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -16,17 +14,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import kr.hs.emirim.evie.testmateloginpage.comm.RetrofitClient
-import kr.hs.emirim.evie.testmateloginpage.home.HomeActivity
 import kr.hs.emirim.evie.testmateloginpage.login.LoginActivity
 import kr.hs.emirim.evie.testmateloginpage.signup.SignUpRequest
 
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -209,12 +203,12 @@ class SignUpActivity : AppCompatActivity() {
 
         if (isFormValid) {
             btnJoin.isEnabled = true
-            btnJoin.setBackgroundResource(R.drawable.rectangle_round)
+            btnJoin.setBackgroundResource(R.drawable.bg_rectangle_round)
             btnJoin.backgroundTintList = resources.getColorStateList(R.color.green_500, null)
             btnJoin.setTextColor(resources.getColor(R.color.white, null))
         } else {
             btnJoin.isEnabled = false
-            btnJoin.setBackgroundResource(R.drawable.rectangle_round)
+            btnJoin.setBackgroundResource(R.drawable.bg_rectangle_round)
             btnJoin.backgroundTintList = resources.getColorStateList(R.color.black_100, null)
             btnJoin.setTextColor(resources.getColor(R.color.black_300, null))
         }
